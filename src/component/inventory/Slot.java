@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class Slot extends Pane {
-    private IUsable item;
+    private Item item;
     private ImageView imageView;
     public Slot(Item item) {
         imageView = item.getImageView();
@@ -29,7 +29,6 @@ public class Slot extends Pane {
     private void addEventListeners() {
         setOnMouseClicked(e -> {
             item.use();
-            setVisible(false);
             Inventory.getInstance().updateInventory();
         });
 
@@ -48,5 +47,9 @@ public class Slot extends Pane {
         text.setLayoutY(15);
         text.setTextFill(Color.WHITE);
         getChildren().add(text);
+    }
+
+    public Item getItem() {
+        return item;
     }
 }

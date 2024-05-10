@@ -1,6 +1,9 @@
 package component.inventory;
 
 import component.item.HpPotion;
+import component.item.equipment.Amulet;
+import component.item.equipment.Armor;
+import component.item.equipment.Weapon;
 import javafx.animation.AnimationTimer;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -29,8 +32,16 @@ public class Inventory extends GridPane {
 
     private void initialInventory() {
         slots = new ArrayList<>();
+
+        slots.add(new Slot(new HpPotion(10)));
+        slots.add(new Slot(new Armor()));
+        slots.add(new Slot(new Weapon()));
+        slots.add(new Slot(new HpPotion(20)));
+        slots.add(new Slot(new Amulet()));
+
         setHgap(2);
         setVgap(2);
+
         AnchorPane.setTopAnchor(this, 5.0);
         AnchorPane.setLeftAnchor(this, 100.0);
     }
@@ -38,7 +49,7 @@ public class Inventory extends GridPane {
     public void updateInventory() {
         getChildren().clear();
 
-        slots.removeIf(slot -> !slot.isVisible());
+        slots.removeIf(slot -> slot.getItem().isDestroyed());
 
         for (int i = 0; i < INVENTORY_SIZE; i++) {
             if (i < slots.size()) {

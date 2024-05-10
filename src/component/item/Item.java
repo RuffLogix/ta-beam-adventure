@@ -7,6 +7,7 @@ public abstract class Item implements IUsable{
     protected String name;
     protected Image image;
     protected ImageView imageView;
+    private boolean isDestroyed = false;
 
     public Item(String name, Image image) {
         this.name = name;
@@ -20,5 +21,13 @@ public abstract class Item implements IUsable{
 
     public Image getImage() {
         return image;
+    }
+
+    public void setDestroyed(boolean isDestroyed) {
+        this.isDestroyed = isDestroyed;
+    }
+
+    public boolean isDestroyed() {
+        return isDestroyed;
     }
 }

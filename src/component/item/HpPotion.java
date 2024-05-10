@@ -19,6 +19,7 @@ public class HpPotion extends Item {
     public void use() {
         Player player = Player.getInstance();
         player.heal(healAmount);
+        setDestroyed(true);
     }
 
     public void setHealAmount(int healAmount) {
