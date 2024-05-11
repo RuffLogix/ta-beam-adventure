@@ -43,6 +43,7 @@ public class GameViewManager {
     private ArrayList<Slime> slimes;
     DayNightLight dayNightLight;
     private static GameViewManager instance;
+    private Text playerLevel;
 
     public static GameViewManager getInstance() {
         if (instance == null) {
@@ -68,7 +69,11 @@ public class GameViewManager {
 
         createSubScenes();
         createTeleport();
-        gamePane.getChildren().add(player.getPlayerImageView());
+        playerLevel = new Text();
+        playerLevel.setText("Level: " + Player.level);
+        playerLevel.setFill(Color.WHITE);
+
+        gamePane.getChildren().addAll(player.getPlayerImageView(), playerLevel);
     }
 
     private void createDayNightLight() {
@@ -209,6 +214,7 @@ public class GameViewManager {
                 updateSlime();
                 marketSubScene.toFront();
                 inventorySubScene.toFront();
+                playerLevel.setText("Level: " + Player.level);
             }
         };
         gameTimer.start();
@@ -250,6 +256,9 @@ public class GameViewManager {
             inventorySubScene.setLayoutY(player.getPlayerImageView().getLayoutY() + 250);
             marketSubScene.setLayoutY(player.getPlayerImageView().getLayoutY() - 200);
         }
+
+        playerLevel.setLayoutX(player.getPlayerImageView().getLayoutX() + 35);
+        playerLevel.setLayoutY(player.getPlayerImageView().getLayoutY() - 10);
     }
 
     public static boolean isOutsideGame(Point2D position) {
