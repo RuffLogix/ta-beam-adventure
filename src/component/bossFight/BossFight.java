@@ -56,7 +56,7 @@ public class BossFight extends StackPane {
 
         Scene scene = new Scene(mainPane, 800, 600);
         mainStage = new Stage();
-
+        mainStage.setTitle("TA.Beam's Adventure");
         mainStage.setScene(scene);
     }
     public static Stage getMainStage() {

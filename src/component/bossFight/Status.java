@@ -90,7 +90,7 @@ public class Status {
         backButton.setFont(new Font(20));
         // back
         backButton.setOnMouseClicked(e -> {
-            ViewManager.getInstance().getMainStage().show();
+            GameViewManager.getInstance().getGameStage().show();
             BossFight.getMainStage().close();
         });
         //

@@ -54,7 +54,7 @@ public class AttackButton extends HBox {
                 Status.showMsg(BossFight.resultImg);
                 // reduce boss hp if player wins
                 if(myResult.equals(UnitUtils.Result.WIN)){attackedBoss.setHp(attackedBoss.getHp()-Player.getInstance().getAtk());}
-                else if(myResult.equals(UnitUtils.Result.LOSS)){Player.getInstance().takeDamage(20);}
+                else if(myResult.equals(UnitUtils.Result.LOSS)){Player.getInstance().takeDamage(10);}
 
                 BossPane.bossHpText.setText("Your HP: "+ Player.getHp()+" VS  Boss HP: " + attackedBoss.getHp());
                 BossFight.statusBox.getGraphicsContext2D().clearRect(0,0,300,400);
