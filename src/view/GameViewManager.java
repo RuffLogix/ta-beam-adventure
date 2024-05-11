@@ -2,20 +2,27 @@ package view;
 
 import component.player.Player;
 import component.unit.Slime;
+import javafx.animation.FadeTransition;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import subscene.InventorySubScene;
 import subscene.MarketSubScene;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utils.DayNightLight;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,6 +40,7 @@ public class GameViewManager {
     public final static int TILE_SIZE = 100;
     private Player player = Player.getInstance();
     private ArrayList<Slime> slimes;
+    DayNightLight dayNightLight;
 
     public GameViewManager() {
         initialGameStage();
@@ -46,10 +54,16 @@ public class GameViewManager {
         createListeners();
         loadResources();
         renderTile();
-        renderSlime(30);
+        createDayNightLight();
+        renderSlime(Math.max((int) (Math.random() * 50), 20));
 
         createSubScenes();
         gamePane.getChildren().add(player.getPlayerImageView());
+    }
+
+    private void createDayNightLight() {
+        dayNightLight = new DayNightLight();
+        gamePane.getChildren().add(dayNightLight);
     }
 
     private void loadResources() {
@@ -69,8 +83,9 @@ public class GameViewManager {
 
     private void renderTile() {
         try {
-            File gameMap = new File("src/map/map.txt");
-            Scanner fileReader = new Scanner(gameMap);
+            InputStream inputStream = ClassLoader.getSystemResourceAsStream("map/map.txt");
+            if (inputStream == null) return ;
+            Scanner fileReader = new Scanner(inputStream);
 
             int i=0;
             while (fileReader.hasNextLine()) {
@@ -87,15 +102,17 @@ public class GameViewManager {
                     };
 
                     ImageView imageView = new ImageView(image);
-                    imageView.setFitWidth(TILE_SIZE);
-                    imageView.setFitHeight(TILE_SIZE);
-                    imageView.setLayoutX(j*TILE_SIZE);
-                    imageView.setLayoutY(i*TILE_SIZE);
+                    imageView.setFitWidth(TILE_SIZE/2);
+                    imageView.setFitHeight(TILE_SIZE/2);
+                    imageView.setLayoutX(j*TILE_SIZE/2);
+                    imageView.setLayoutY(i*TILE_SIZE/2);
                     gamePane.getChildren().add(imageView);
                     j++;
                 }
                 i++;
             }
+
+            fileReader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -127,8 +144,9 @@ public class GameViewManager {
     }
 
     private void createSubScenes() {
+        marketSubScene = new MarketSubScene();
         inventorySubScene = new InventorySubScene();
-        gamePane.getChildren().add(inventorySubScene);
+        gamePane.getChildren().addAll(marketSubScene, inventorySubScene);
     }
 
     public void createNewGame(Stage mainStage) {
@@ -143,8 +161,8 @@ public class GameViewManager {
             public void handle(long now) {
                 player.playerAnimation((int) (now/100000000));
                 player.update();
-                inventorySubScene.updateStats();
                 updateCamera();
+                inventorySubScene.updateStats();
                 updateSlime();
             }
         };
@@ -166,10 +184,27 @@ public class GameViewManager {
     }
 
     private void updateCamera() {
-        inventorySubScene.setLayoutX(player.getPlayerImageView().getLayoutX() - 275);
-        inventorySubScene.setLayoutY(player.getPlayerImageView().getLayoutY() + 250);
-        gamePane.setLayoutX(-player.getPlayerImageView().getLayoutX() + ViewManager.WINDOW_WIDTH/2.0 - TILE_SIZE/2.0);
-        gamePane.setLayoutY(-player.getPlayerImageView().getLayoutY() + ViewManager.WINDOW_HEIGHT/2.0 - TILE_SIZE/2.0);
+        if (player.getPlayerImageView().getLayoutX() < 350) {
+            gamePane.setLayoutX(0);
+            inventorySubScene.setLayoutX(75);
+        } else if (player.getPlayerImageView().getLayoutX() > 1150) {
+            gamePane.setLayoutX(-800);
+            inventorySubScene.setLayoutX(800 + 75);
+        } else {
+            gamePane.setLayoutX(-player.getPlayerImageView().getLayoutX() + ViewManager.WINDOW_WIDTH/2.0 - TILE_SIZE/2.0);
+            inventorySubScene.setLayoutX(player.getPlayerImageView().getLayoutX() - 275);
+        }
+
+        if (player.getPlayerImageView().getLayoutY() < 250) {
+            gamePane.setLayoutY(0);
+        } else if (player.getPlayerImageView().getLayoutY() > 950) {
+            gamePane.setLayoutY(-700);
+        } else {
+            gamePane.setLayoutY(-player.getPlayerImageView().getLayoutY() + ViewManager.WINDOW_HEIGHT/2.0 - TILE_SIZE/2.0);
+            inventorySubScene.setLayoutY(player.getPlayerImageView().getLayoutY() + 250);
+        }
+
+        InventorySubScene.getInstance().toFront();
     }
 
     public static boolean isOutsideGame(Point2D position) {
