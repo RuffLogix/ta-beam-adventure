@@ -9,6 +9,6 @@ public class Amulet extends Equipment {
     public Amulet() {
         super("Amulet", null);
         super.setImage(writableImage);
-        durability = 250;
+        durability = 10;
     }
 }

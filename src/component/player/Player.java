@@ -96,11 +96,14 @@ public class Player {
         if (horizontalDirection == 0 && verticalDirection == 0) return;
 
         spriteIndex = spriteIndex % 3;
-        switch (direction) {
-            case 0 -> playerImageView.setImage(walkUp[spriteIndex]);
-            case 1 -> playerImageView.setImage(walkRight[spriteIndex]);
-            case 2 -> playerImageView.setImage(walkLeft[spriteIndex]);
-            case 3 -> playerImageView.setImage(walkDown[spriteIndex]);
+        if (direction == 0) {
+            playerImageView.setImage(walkUp[spriteIndex]);
+        } else if (direction == 1) {
+            playerImageView.setImage(walkRight[spriteIndex]);
+        } else if (direction == 2) {
+            playerImageView.setImage(walkLeft[spriteIndex]);
+        } else if (direction == 3) {
+            playerImageView.setImage(walkDown[spriteIndex]);
         }
     }
 

@@ -10,7 +10,7 @@ public class Weapon extends Equipment {
     public Weapon() {
         super("Weapon", null);
         super.setImage(writableImage);
-        durability = 100;
+        durability = 5;
         damage = 5;
     }
 
@@ -24,6 +24,6 @@ public class Weapon extends Equipment {
 
         super.upgrade();
         damage += 5;
-        durability = 100;
+        durability = 7;
     }
 }

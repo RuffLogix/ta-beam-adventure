@@ -14,31 +14,22 @@ public class EquipmentUtils {
 
     public static Image getImage(Equipment equipment) {
         if (equipment instanceof Weapon) {
-            switch (equipment.getTier()) {
-                case Bronze -> {
-                    return new WritableImage(IMAGE.getPixelReader(), 312, 250, 63, 63);
-                }
-                case Silver -> {
-                    return new WritableImage(IMAGE.getPixelReader(), 437, 250, 63, 63);
-                }
+            if (equipment.getTier().equals(TIER.Bronze)) {
+                return new WritableImage(IMAGE.getPixelReader(), 312, 250, 63, 63);
+            } else if (equipment.getTier().equals(TIER.Silver)) {
+                return new WritableImage(IMAGE.getPixelReader(), 437, 250, 63, 63);
             }
         } else if (equipment instanceof Armor) {
-            switch (equipment.getTier()) {
-                case Bronze -> {
-                    return new WritableImage(IMAGE.getPixelReader(), 316, 7, 56, 52);
-                }
-                case Silver -> {
-                    return new WritableImage(IMAGE.getPixelReader(), 441, 7, 56, 52);
-                }
+            if (equipment.getTier().equals(TIER.Bronze)) {
+                return new WritableImage(IMAGE.getPixelReader(), 316, 7, 56, 52);
+            } else if (equipment.getTier().equals(TIER.Silver)) {
+                return new WritableImage(IMAGE.getPixelReader(), 441, 7, 56, 52);
             }
         } else if (equipment instanceof Amulet) {
-            switch (equipment.getTier()) {
-                case Bronze -> {
-                    return new WritableImage(IMAGE.getPixelReader(), 11, 449, 36, 40);
-                }
-                case Silver -> {
-                    return new WritableImage(IMAGE.getPixelReader(), 74, 449, 36, 40);
-                }
+            if (equipment.getTier().equals(TIER.Bronze)) {
+                return new WritableImage(IMAGE.getPixelReader(), 11, 449, 36, 40);
+            } else if (equipment.getTier().equals(TIER.Silver)) {
+                return new WritableImage(IMAGE.getPixelReader(), 74, 449, 36, 40);
             }
         }
 

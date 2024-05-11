@@ -7,6 +7,7 @@ import javafx.animation.FadeTransition;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -109,12 +110,15 @@ public class GameViewManager {
                 for (char c : data.toCharArray()) {
                     if (c==' ') continue;
 
-                    Image image = switch (c) {
-                        case '0' -> new Image(stoneResourcePath);
-                        case '1' -> new Image(grass1ResourcePath);
-                        case '2' -> new Image(grass2ResourcePath);
-                        default -> new Image(stoneResourcePath);
-                    };
+                    Image image = null;
+
+                    if (c == '0') {
+                        image = new Image(stoneResourcePath);
+                    } else if (c == '1') {
+                        image = new Image(grass1ResourcePath);
+                    } else if (c == '2') {
+                        image = new Image(grass2ResourcePath);
+                    }
 
                     ImageView imageView = new ImageView(image);
                     imageView.setFitWidth(TILE_SIZE/2);
@@ -135,23 +139,28 @@ public class GameViewManager {
 
     private void createListeners() {
         gameScene.setOnKeyTyped(e -> {
-            switch (e.getCharacter()) {
-                case "w" -> { if (!marketSubScene.isVisible()) player.setVerticalDirection(-1); }
-                case "s" -> { if (!marketSubScene.isVisible()) player.setVerticalDirection(1); }
-                case "a" -> { if (!marketSubScene.isVisible()) player.setHorizontalDirection(-1); }
-                case "d" -> { if (!marketSubScene.isVisible()) player.setHorizontalDirection(1); }
-                case "1" -> { if (Player.getInstance().getArmor() != null)Player.getInstance().getArmor().upgrade(); }
-                case "2" -> { if (Player.getInstance().getWeapon() != null)Player.getInstance().getWeapon().upgrade(); }
-                case "3" -> { if (Player.getInstance().getAmulet() != null)Player.getInstance().getAmulet().upgrade(); }
-                case "m" -> marketSubScene.toggle();
+            if (e.getCharacter().equals("w")) {
+                if (!marketSubScene.isVisible()) player.setVerticalDirection(-1);
+            } else if (e.getCharacter().equals("s")) {
+                if (!marketSubScene.isVisible()) player.setVerticalDirection(1);
+            } else if (e.getCharacter().equals("a")) {
+                if (!marketSubScene.isVisible()) player.setHorizontalDirection(-1);
+            } else if (e.getCharacter().equals("d")) {
+                if (!marketSubScene.isVisible()) player.setHorizontalDirection(1);
+            } else if (e.getCharacter().equals("1")) {
+                if (Player.getInstance().getArmor() != null) Player.getInstance().getArmor().upgrade();
+            } else if (e.getCharacter().equals("2")) {
+                if (Player.getInstance().getWeapon() != null) Player.getInstance().getWeapon().upgrade();
+            } else if (e.getCharacter().equals("3")) {
+                if (Player.getInstance().getAmulet() != null) Player.getInstance().getAmulet().upgrade();
+            } else if (e.getCharacter().equals("m")) {
+                marketSubScene.toggle();
             }
         });
 
         gameScene.setOnKeyReleased(e -> {
-            switch (e.getCode()) {
-                case W, S -> player.setVerticalDirection(0);
-                case D, A -> player.setHorizontalDirection(0);
-            }
+            if (e.getCode() == KeyCode.W || e.getCode() == KeyCode.S) player.setVerticalDirection(0);
+            if (e.getCode() == KeyCode.A || e.getCode() == KeyCode.D) player.setHorizontalDirection(0);
         });
     }
 

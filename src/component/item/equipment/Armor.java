@@ -11,7 +11,7 @@ public class Armor extends Equipment {
     public Armor() {
         super("Armor", null);
         super.setImage(writableImage);
-        durability = 100;
+        durability = 3;
         defense = 5;
     }
 
@@ -25,6 +25,6 @@ public class Armor extends Equipment {
 
         super.upgrade();
         defense += 5;
-        durability = 100;
+        durability = 5;
     }
 }
