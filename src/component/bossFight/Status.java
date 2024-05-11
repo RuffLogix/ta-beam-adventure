@@ -67,6 +67,14 @@ public class Status {
         gc.setFont(new Font(20));
         gc.fillText("Boss level: "+Player.level,20,40);
         gc.fillText("Your Equipment:",20,70);
+
+        String armorName = Player.getInstance().getArmor()!=null ? Player.getInstance().getArmor().getName() : "None";
+        String weaponName = Player.getInstance().getWeapon()!=null ? Player.getInstance().getWeapon().getName() : "None";
+        String amuletName = Player.getInstance().getAmulet()!=null ? Player.getInstance().getAmulet().getName() : "None";
+
+        gc.fillText("Armor:"+armorName,20,130);
+        gc.fillText("Weapon:"+weaponName,20,160);
+        gc.fillText("Amulet:"+amuletName,20,190);
     }
     public static void drawBossConquered(BossFight bossFight){
         Canvas canvas = new Canvas(800,600);
