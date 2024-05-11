@@ -65,7 +65,7 @@ public class Status {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.WHITE);
         gc.setFont(new Font(20));
-        gc.fillText("Boss level: "+ BossPane.boss.getHp(),20,40);
+        gc.fillText("Boss level: "+Player.level,20,40);
         gc.fillText("Your Equipment:",20,70);
     }
     public static void drawBossConquered(BossFight bossFight){
