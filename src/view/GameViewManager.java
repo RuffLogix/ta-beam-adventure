@@ -1,5 +1,6 @@
 package view;
 
+import component.bossFight.BossFight;
 import component.player.Player;
 import component.unit.Slime;
 import javafx.animation.FadeTransition;
@@ -66,6 +67,7 @@ public class GameViewManager {
         renderSlime(Math.max((int) (Math.random() * 50), 20));
 
         createSubScenes();
+        createTeleport();
         gamePane.getChildren().add(player.getPlayerImageView());
     }
 
@@ -129,11 +131,14 @@ public class GameViewManager {
     private void createListeners() {
         gameScene.setOnKeyTyped(e -> {
             switch (e.getCharacter()) {
-                case "w" -> player.setVerticalDirection(-1);
-                case "s" -> player.setVerticalDirection(1);
-                case "a" -> player.setHorizontalDirection(-1);
-                case "d" -> player.setHorizontalDirection(1);
-
+                case "w" -> { if (!marketSubScene.isVisible()) player.setVerticalDirection(-1); }
+                case "s" -> { if (!marketSubScene.isVisible()) player.setVerticalDirection(1); }
+                case "a" -> { if (!marketSubScene.isVisible()) player.setHorizontalDirection(-1); }
+                case "d" -> { if (!marketSubScene.isVisible()) player.setHorizontalDirection(1); }
+                case "1" -> { if (Player.getInstance().getArmor() != null)Player.getInstance().getArmor().upgrade(); }
+                case "2" -> { if (Player.getInstance().getWeapon() != null)Player.getInstance().getWeapon().upgrade(); }
+                case "3" -> { if (Player.getInstance().getAmulet() != null)Player.getInstance().getAmulet().upgrade(); }
+                case "m" -> marketSubScene.toggle();
             }
         });
 
@@ -163,6 +168,34 @@ public class GameViewManager {
         this.mainStage = mainStage;
         mainStage.hide();
         gameStage.show();
+    }
+
+    private void createTeleport() {
+        Image image = new Image(ClassLoader.getSystemResource("sprite/teleport.png").toString());
+        ImageView imageView = new ImageView(image);
+
+        imageView.setLayoutX(1150);
+        imageView.setLayoutY(-125);
+
+        imageView.setOnMouseEntered(e -> {
+            imageView.setStyle("-fx-effect: dropshadow(three-pass-box, white, 10, 0, 0, 0);");
+        });
+
+        imageView.setOnMouseExited(e -> {
+            imageView.setStyle("");
+        });
+
+        imageView.setOnMouseClicked(e -> {
+            try {
+                gameStage.hide();
+                BossFight.getInstance();
+                BossFight.getMainStage().show();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        gamePane.getChildren().add(imageView);
     }
 
     private void createGameLoop() {
@@ -215,7 +248,7 @@ public class GameViewManager {
         } else {
             gamePane.setLayoutY(-player.getPlayerImageView().getLayoutY() + ViewManager.WINDOW_HEIGHT/2.0 - TILE_SIZE/2.0);
             inventorySubScene.setLayoutY(player.getPlayerImageView().getLayoutY() + 250);
-            marketSubScene.setLayoutY(player.getPlayerImageView().getLayoutY() - 250);
+            marketSubScene.setLayoutY(player.getPlayerImageView().getLayoutY() - 200);
         }
     }
 

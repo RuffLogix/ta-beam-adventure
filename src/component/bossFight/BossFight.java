@@ -25,14 +25,12 @@ public class BossFight extends StackPane {
   public static Canvas resultImg = new Canvas(220,150);
   public static UnitUtils.Outcome myChoice;
 
-  public BossFight(){
+  private BossFight(){
       createMainStage();
   }
     public static BossFight getInstance() {
-        if (instance == null) {
-            instance = new BossFight();
-        }
-        return instance;
+      instance = new BossFight();
+      return instance;
     }
     private void createMainStage() {
         mainPane = new StackPane();

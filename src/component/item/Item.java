@@ -23,11 +23,20 @@ public abstract class Item implements IUsable{
         return image;
     }
 
+    public void setImage(Image image) {
+        this.image = image;
+        this.imageView = new ImageView(image);
+    }
+
     public void setDestroyed(boolean isDestroyed) {
         this.isDestroyed = isDestroyed;
     }
 
     public boolean isDestroyed() {
         return isDestroyed;
+    }
+
+    public String getName() {
+        return name;
     }
 }

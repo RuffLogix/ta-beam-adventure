@@ -1,6 +1,7 @@
 package component.inventory;
 
 import component.item.HpPotion;
+import component.item.RefineIron;
 import component.item.equipment.Amulet;
 import component.item.equipment.Armor;
 import component.item.equipment.Weapon;
@@ -39,6 +40,12 @@ public class Inventory extends GridPane {
         slots.add(new Slot(new Weapon()));
         slots.add(new Slot(new HpPotion(20)));
         slots.add(new Slot(new Amulet()));
+        slots.add(new Slot(new RefineIron()));
+        slots.add(new Slot(new RefineIron()));
+        slots.add(new Slot(new RefineIron()));
+        slots.add(new Slot(new RefineIron()));
+        slots.add(new Slot(new RefineIron()));
+
 
         setHgap(2);
         setVgap(2);
@@ -59,6 +66,8 @@ public class Inventory extends GridPane {
             } else {
                 Rectangle rectangle = new Rectangle(30, 30);
                 rectangle.setOpacity(0.5);
+                rectangle.setOnMouseEntered(e -> rectangle.setOpacity(1));
+                rectangle.setOnMouseExited(e -> rectangle.setOpacity(0.5));
                 add(rectangle, i % 13, i / 13);
             }
         }
