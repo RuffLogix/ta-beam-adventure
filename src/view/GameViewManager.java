@@ -1,5 +1,6 @@
 package view;
 
+import component.bossFight.BossFight;
 import component.player.Player;
 import component.unit.Slime;
 import javafx.animation.FadeTransition;
@@ -184,8 +185,13 @@ public class GameViewManager {
         });
 
         imageView.setOnMouseClicked(e -> {
-            gameStage.hide();
-            mainStage.show();
+            try {
+                gameStage.hide();
+                BossFight.getInstance();
+                BossFight.getMainStage().show();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
 
         gamePane.getChildren().add(imageView);
