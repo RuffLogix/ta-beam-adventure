@@ -18,7 +18,16 @@ public class ViewManager {
     private Scene mainScene;
     private Button startButton;
     private Button exitButton;
-    public ViewManager() {
+    private static ViewManager instance;
+
+    public static ViewManager getInstance() {
+        if (instance == null) {
+            instance = new ViewManager();
+        }
+        return instance;
+    }
+
+    private ViewManager() {
         createMainStage();
         createButtons();
     }
