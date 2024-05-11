@@ -118,9 +118,9 @@ public class Status {
         backButton.setPrefSize(200,20);
         backButton.setFont(new Font(20));
         // exit
-        backButton.setOnAction(e -> {
+        backButton.setOnMouseClicked(e -> {
             ViewManager.getInstance().getMainStage().show();
-            BossFight.getInstance().getMainStage().close();
+            BossFight.getMainStage().close();
         });
         //
         AnchorPane.setBottomAnchor(backButton,50.0);

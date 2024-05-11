@@ -260,4 +260,9 @@ public class GameViewManager {
     public Stage getGameStage() {
         return gameStage;
     }
+
+    public void reset() {
+        gameTimer.stop();
+        instance = null;
+    }
 }
