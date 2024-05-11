@@ -1,6 +1,8 @@
 package subscene;
 
 import component.inventory.Inventory;
+import component.inventory.Slot;
+import component.item.equipment.Armor;
 import component.player.Player;
 import javafx.scene.SubScene;
 import javafx.scene.control.Label;
@@ -45,8 +47,8 @@ public class InventorySubScene extends SubScene {
 
         coinLabel = createStyledLabel("Coins: " + Player.getInstance().getCoin());
         hpLabel = createStyledLabel("HP: " + Player.getInstance().getHp() + "/" + Player.MAX_HP);
-        atkLabel = createStyledLabel("Atk: 15");
-        defLabel = createStyledLabel("Def: 10");
+        atkLabel = createStyledLabel("Atk: " + Player.getInstance().getAtk());
+        defLabel = createStyledLabel("Def: " + (Player.getInstance().getArmor() == null ? 0 : Player.getInstance().getArmor().getDefense()));
 
         statsBox.getChildren().addAll(coinLabel, hpLabel, atkLabel, defLabel);
 
@@ -59,6 +61,12 @@ public class InventorySubScene extends SubScene {
     public void updateStats() {
         coinLabel.setText("Coins: " + Player.getInstance().getCoin());
         hpLabel.setText("HP: " + Player.getInstance().getHp() + "/" + Player.MAX_HP);
+        atkLabel.setText("Atk: " + Player.getInstance().getAtk());
+        defLabel.setText("Def: " + (Player.getInstance().getArmor() == null ? 0 : Player.getInstance().getArmor().getDefense()));
+
+        armorLabel.setText("Armor: " + (Player.getInstance().getArmor() == null ? "None" : Player.getInstance().getArmor().getName()));
+        weaponLabel.setText("Weapon: " + (Player.getInstance().getWeapon() == null ? "None" : Player.getInstance().getWeapon().getName()));
+        amuletLabel.setText("Amulet: " + (Player.getInstance().getAmulet() == null ? "None" : Player.getInstance().getAmulet().getName()));
     }
 
     private void setupItemSlots(AnchorPane root) {
@@ -70,9 +78,38 @@ public class InventorySubScene extends SubScene {
     private void setupEquipment(AnchorPane root) {
         VBox equipmentBox = new VBox(5);
 
-        armorLabel = createStyledLabel("Armor: Leather");
-        weaponLabel = createStyledLabel("Weapon: Sword");
-        amuletLabel = createStyledLabel("Amulet: Courage");
+        armorLabel = createStyledLabel("Armor: None");
+        weaponLabel = createStyledLabel("Weapon: None");
+        amuletLabel = createStyledLabel("Amulet: None");
+
+        armorLabel.setOnMouseClicked(e -> {
+            if (Player.getInstance().getArmor() != null) {
+                Armor armor = Player.getInstance().getArmor();
+                armor.setDestroyed(false);
+                Inventory.getInstance().getSlots().add(new Slot(armor));
+                Player.getInstance().setArmor(null);
+                updateStats();
+                Inventory.getInstance().updateInventory();
+            }
+        });
+        weaponLabel.setOnMouseClicked(e -> {
+            if (Player.getInstance().getWeapon() != null) {
+                Player.getInstance().getWeapon().setDestroyed(false);
+                Inventory.getInstance().getSlots().add(new Slot(Player.getInstance().getWeapon()));
+                Player.getInstance().setWeapon(null);
+                updateStats();
+                Inventory.getInstance().updateInventory();
+            }
+        });
+        amuletLabel.setOnMouseClicked(e -> {
+            if (Player.getInstance().getAmulet() != null) {
+                Player.getInstance().getAmulet().setDestroyed(false);
+                Inventory.getInstance().getSlots().add(new Slot(Player.getInstance().getAmulet()));
+                Player.getInstance().setAmulet(null);
+                updateStats();
+                Inventory.getInstance().updateInventory();
+            }
+        });
 
         equipmentBox.getChildren().addAll(armorLabel, weaponLabel, amuletLabel);
 
