@@ -89,9 +89,9 @@ public class Status {
         backButton.setPrefSize(200,20);
         backButton.setFont(new Font(20));
         // back
-        backButton.setOnAction(e -> {
-            GameViewManager.getInstance().getGameStage().show();
-            BossFight.getInstance().getMainStage().close();
+        backButton.setOnMouseClicked(e -> {
+            ViewManager.getInstance().getMainStage().show();
+            BossFight.getMainStage().close();
         });
         //
         AnchorPane.setBottomAnchor(backButton,50.0);
