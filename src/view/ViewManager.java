@@ -56,9 +56,7 @@ public class ViewManager {
         mainPane.getChildren().add(startButton);
 
         startButton.setOnAction(e -> {
-            GameViewManager gameManager = new GameViewManager();
-
-            gameManager.createNewGame(mainStage);
+            GameViewManager.getInstance().createNewGame(mainStage);
         });
     }
 
