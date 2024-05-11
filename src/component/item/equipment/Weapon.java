@@ -20,7 +20,7 @@ public class Weapon extends Equipment {
 
     @Override
     public void upgrade() {
-        if (tier==EquipmentUtils.TIER.Silver) return ;
+        if (tier==EquipmentUtils.TIER.Gold) return ;
 
         super.upgrade();
         damage += 5;

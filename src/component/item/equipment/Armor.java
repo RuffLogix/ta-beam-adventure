@@ -21,7 +21,7 @@ public class Armor extends Equipment {
 
     @Override
     public void upgrade() {
-        if (tier==EquipmentUtils.TIER.Silver) return ;
+        if (tier==EquipmentUtils.TIER.Gold) return ;
 
         super.upgrade();
         defense += 5;

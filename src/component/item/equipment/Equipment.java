@@ -66,8 +66,7 @@ public class Equipment extends Item implements Refinable {
 
     @Override
     public void upgrade() {
-        if (tier == EquipmentUtils.TIER.Silver) return ;
-
+        if (tier == EquipmentUtils.TIER.Gold) return ;
         boolean found = false;
         for (Slot slot: Inventory.getInstance().getSlots()) {
             if (slot.getItem() instanceof RefineIron) {
@@ -78,8 +77,10 @@ public class Equipment extends Item implements Refinable {
         }
         if (!found) return ;
 
+
         name = name + "+";
-        tier = EquipmentUtils.TIER.Silver;
+        if(tier == EquipmentUtils.TIER.Bronze){tier = EquipmentUtils.TIER.Silver;}
+        else if(tier == EquipmentUtils.TIER.Silver){tier = EquipmentUtils.TIER.Gold;}
         image = EquipmentUtils.getImage(this);
         imageView = new ImageView(EquipmentUtils.getImage(this));
         Inventory.getInstance().updateInventory();
