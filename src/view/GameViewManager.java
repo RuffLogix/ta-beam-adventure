@@ -133,7 +133,7 @@ public class GameViewManager {
                 case "s" -> player.setVerticalDirection(1);
                 case "a" -> player.setHorizontalDirection(-1);
                 case "d" -> player.setHorizontalDirection(1);
-               
+
             }
         });
 
@@ -150,6 +150,7 @@ public class GameViewManager {
         gameScene = new Scene(gamePane, ViewManager.WINDOW_WIDTH, ViewManager.WINDOW_HEIGHT);
         gameStage = new Stage();
         gameStage.setScene(gameScene);
+        gameStage.setTitle("TA.Beam's Adventure");
     }
 
     private void createSubScenes() {

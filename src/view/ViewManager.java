@@ -44,7 +44,7 @@ public class ViewManager {
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(800,600,true,true,true,true));
         Background bGround = new Background(bImg);
         mainPane.setBackground(bGround);
-        Text name = new Text("AJ.TOE'S ADVENTURE");
+        Text name = new Text("TA.BEAM'S ADVENTURE");
         name.setFont(Font.font("Verdana", FontWeight.BOLD,40));
         name.setFill(Color.WHITE);
         name.setStroke(Color.BLACK);
@@ -54,6 +54,7 @@ public class ViewManager {
         mainScene = new Scene(mainPane, WINDOW_WIDTH, WINDOW_HEIGHT);
         mainStage = new Stage();
         mainStage.setResizable(false);
+        mainStage.setTitle("TA.Beam's Adventure");
         mainStage.setScene(mainScene);
     }
 
