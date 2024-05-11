@@ -139,7 +139,7 @@ public class Player {
 
     public void takeDamage(int amount) {
         if (armor != null) {
-            amount = Math.max(0, amount - armor.getDefense());
+            amount = (int) Math.max(0, amount * Math.max(0.1, 1.0 - ((double) armor.getDefense()/100.0)));
             armor.decreaseDurability();
             if (armor.getDurability() <= 0) armor = null;
         }
