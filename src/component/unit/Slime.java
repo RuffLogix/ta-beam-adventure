@@ -17,7 +17,7 @@ public class Slime extends BasedUnit {
 
     private void initialSlime() {
         speed = 0.5;
-        coin = (int) (Math.random() * 10) + 1;
+        coin = (int) (Math.random() * 2) + 1;
         imagePath = ClassLoader.getSystemResource("sprite/slime.png").toString();
         position = new Point2D(0, 0);
     }

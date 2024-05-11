@@ -29,6 +29,7 @@ public class Slot extends Pane {
     private void addEventListeners() {
         setOnMouseClicked(e -> {
             item.use();
+            imageView.setImage(item.getImage());
             Inventory.getInstance().updateInventory();
         });
 

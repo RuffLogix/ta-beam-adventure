@@ -41,8 +41,16 @@ public class GameViewManager {
     private Player player = Player.getInstance();
     private ArrayList<Slime> slimes;
     DayNightLight dayNightLight;
+    private static GameViewManager instance;
 
-    public GameViewManager() {
+    public static GameViewManager getInstance() {
+        if (instance == null) {
+            instance = new GameViewManager();
+        }
+        return instance;
+    }
+
+    private GameViewManager() {
         initialGameStage();
     }
 
@@ -58,6 +66,7 @@ public class GameViewManager {
         renderSlime(Math.max((int) (Math.random() * 50), 20));
 
         createSubScenes();
+        createTeleport();
         gamePane.getChildren().add(player.getPlayerImageView());
     }
 
@@ -121,10 +130,14 @@ public class GameViewManager {
     private void createListeners() {
         gameScene.setOnKeyTyped(e -> {
             switch (e.getCharacter()) {
-                case "w" -> player.setVerticalDirection(-1);
-                case "s" -> player.setVerticalDirection(1);
-                case "a" -> player.setHorizontalDirection(-1);
-                case "d" -> player.setHorizontalDirection(1);
+                case "w" -> { if (!marketSubScene.isVisible()) player.setVerticalDirection(-1); }
+                case "s" -> { if (!marketSubScene.isVisible()) player.setVerticalDirection(1); }
+                case "a" -> { if (!marketSubScene.isVisible()) player.setHorizontalDirection(-1); }
+                case "d" -> { if (!marketSubScene.isVisible()) player.setHorizontalDirection(1); }
+                case "1" -> { if (Player.getInstance().getArmor() != null)Player.getInstance().getArmor().upgrade(); }
+                case "2" -> { if (Player.getInstance().getWeapon() != null)Player.getInstance().getWeapon().upgrade(); }
+                case "3" -> { if (Player.getInstance().getAmulet() != null)Player.getInstance().getAmulet().upgrade(); }
+                case "m" -> marketSubScene.toggle();
             }
         });
 
@@ -155,6 +168,29 @@ public class GameViewManager {
         gameStage.show();
     }
 
+    private void createTeleport() {
+        Image image = new Image(ClassLoader.getSystemResource("sprite/teleport.png").toString());
+        ImageView imageView = new ImageView(image);
+
+        imageView.setLayoutX(1150);
+        imageView.setLayoutY(-125);
+
+        imageView.setOnMouseEntered(e -> {
+            imageView.setStyle("-fx-effect: dropshadow(three-pass-box, white, 10, 0, 0, 0);");
+        });
+
+        imageView.setOnMouseExited(e -> {
+            imageView.setStyle("");
+        });
+
+        imageView.setOnMouseClicked(e -> {
+            gameStage.hide();
+            mainStage.show();
+        });
+
+        gamePane.getChildren().add(imageView);
+    }
+
     private void createGameLoop() {
         gameTimer = new AnimationTimer() {
             @Override
@@ -164,6 +200,7 @@ public class GameViewManager {
                 updateCamera();
                 inventorySubScene.updateStats();
                 updateSlime();
+                marketSubScene.toFront();
                 inventorySubScene.toFront();
             }
         };
@@ -176,7 +213,7 @@ public class GameViewManager {
         }
 
         gamePane.getChildren().removeIf(e -> {
-            return !(e.isVisible());
+            return !(e.isVisible()) && (e!=marketSubScene);
         });
 
         slimes.removeIf(e -> {
@@ -194,6 +231,7 @@ public class GameViewManager {
         } else {
             gamePane.setLayoutX(-player.getPlayerImageView().getLayoutX() + ViewManager.WINDOW_WIDTH/2.0 - TILE_SIZE/2.0);
             inventorySubScene.setLayoutX(player.getPlayerImageView().getLayoutX() - 275);
+            marketSubScene.setLayoutX(player.getPlayerImageView().getLayoutX() - 175);
         }
 
         if (player.getPlayerImageView().getLayoutY() < 250) {
@@ -203,13 +241,16 @@ public class GameViewManager {
         } else {
             gamePane.setLayoutY(-player.getPlayerImageView().getLayoutY() + ViewManager.WINDOW_HEIGHT/2.0 - TILE_SIZE/2.0);
             inventorySubScene.setLayoutY(player.getPlayerImageView().getLayoutY() + 250);
+            marketSubScene.setLayoutY(player.getPlayerImageView().getLayoutY() - 200);
         }
-
-        InventorySubScene.getInstance().toFront();
     }
 
     public static boolean isOutsideGame(Point2D position) {
         if (position.getX() < 0 || position.getX() > GameViewManager.TILE_SIZE * 15) return true;
         return position.getY() < 0 || position.getY() > GameViewManager.TILE_SIZE * 12;
+    }
+
+    public Stage getGameStage() {
+        return gameStage;
     }
 }

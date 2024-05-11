@@ -2,20 +2,29 @@ package component.item.equipment;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import utils.EquipmentUtils;
 
 public class Armor extends Equipment {
-    private static final String IMAGE_PATH = ClassLoader.getSystemResource("sprite/item.png").toString();
-    private static final Image IMAGE = new Image(IMAGE_PATH);
-    private static WritableImage writableImage = new WritableImage(IMAGE.getPixelReader(), 316, 7, 56, 52);
+    private WritableImage writableImage = (WritableImage) EquipmentUtils.getImage(this);
     private int defense;
 
     public Armor() {
-        super("Armor", writableImage);
+        super("Armor", null);
+        super.setImage(writableImage);
         durability = 100;
         defense = 5;
     }
 
     public int getDefense() {
         return defense;
+    }
+
+    @Override
+    public void upgrade() {
+        if (tier==EquipmentUtils.TIER.Silver) return ;
+
+        super.upgrade();
+        defense += 5;
+        durability = 100;
     }
 }

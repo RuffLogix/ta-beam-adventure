@@ -7,6 +7,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
 import view.GameViewManager;
 import view.ViewManager;
 
@@ -42,6 +43,7 @@ public class Player {
         initialPlayer();
         loadResource();
         render();
+
     }
 
     private void loadResource() {
@@ -138,6 +140,7 @@ public class Player {
         if (armor != null) {
             amount = Math.max(0, amount - armor.getDefense());
             armor.decreaseDurability();
+            if (armor.getDurability() <= 0) armor = null;
         }
         hp = Math.max(0, hp - amount);
     }
@@ -145,12 +148,14 @@ public class Player {
     public void useWeapon() {
         if (weapon != null) {
             weapon.decreaseDurability();
+            if (weapon.getDurability() <= 0) weapon = null;
         }
     }
 
     public void useAmulet() {
         if (amulet != null) {
             amulet.decreaseDurability();
+            if (amulet.getDurability() <= 0) amulet = null;
         }
     }
 
