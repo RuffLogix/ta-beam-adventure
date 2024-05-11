@@ -164,6 +164,7 @@ public class GameViewManager {
                 updateCamera();
                 inventorySubScene.updateStats();
                 updateSlime();
+                inventorySubScene.toFront();
             }
         };
         gameTimer.start();
