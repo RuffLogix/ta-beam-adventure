@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            ViewManager viewManager = new ViewManager();
+            ViewManager viewManager = ViewManager.getInstance();
 
             primaryStage = viewManager.getMainStage();
 
