@@ -28,7 +28,7 @@ public class Player {
     private int coin;
     private static Player instance;
     public static final int MAX_HP = 100;
-
+    public static int level = 1;
     private static int hp = MAX_HP;
     private Armor armor;
     private Amulet amulet;

@@ -1,5 +1,6 @@
 package component.bossFight;
 
+import component.player.Player;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -9,6 +10,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import view.GameViewManager;
+import view.ViewManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -80,14 +83,21 @@ public class Status {
         gc.setFont(new Font(20));
         gc.fillText("You've conquered the boss.",300,250);
         gc.fillText("Your rewards: ",340,300);
+        gc.fillText("Level: +1  Coins: +"+Math.min(Player.level*5,100), 340,340);
         AnchorPane a = new AnchorPane(canvas);
         Button backButton = new Button("back");
         backButton.setPrefSize(200,20);
         backButton.setFont(new Font(20));
+        // back
+        backButton.setOnAction(e -> {
+            GameViewManager.getInstance().getGameStage().show();
+            BossFight.getInstance().getMainStage().close();
+        });
+        //
         AnchorPane.setBottomAnchor(backButton,50.0);
         AnchorPane.setLeftAnchor(backButton,300.0);
         a.getChildren().add(backButton);
-        bossFight.getChildren().add(a);
+        bossFight.mainPane.getChildren().add(a);
     }
     public static void drawGameOver(BossFight bossFight){
         Canvas canvas = new Canvas(800,600);
@@ -107,10 +117,16 @@ public class Status {
         Button backButton = new Button("exit");
         backButton.setPrefSize(200,20);
         backButton.setFont(new Font(20));
+        // exit
+        backButton.setOnAction(e -> {
+            ViewManager.getInstance().getMainStage().show();
+            BossFight.getInstance().getMainStage().close();
+        });
+        //
         AnchorPane.setBottomAnchor(backButton,50.0);
         AnchorPane.setLeftAnchor(backButton,300.0);
         a.getChildren().add(backButton);
-        bossFight.getChildren().add(a);
+        bossFight.mainPane.getChildren().add(a);
     }
     public static void drawLastResultMsg(Label t){
         t.setTextFill(Color.WHITE);

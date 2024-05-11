@@ -1,5 +1,6 @@
 package component.bossFight;
 
+import component.player.Player;
 import javafx.scene.image.ImageView;
 
 public abstract class Boss{
@@ -9,7 +10,7 @@ public abstract class Boss{
     private int level;
     private UnitUtils.Outcome choice;
     public Boss(){
-        setHp(100);
+        setHp(Player.level*20);
         setPower(5);
         setLevel(1);
     }

@@ -3,6 +3,7 @@ package component.bossFight;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import view.ViewManager;
 
 public class TestBossFight extends Application {
     public static void main(String args[]) {
@@ -11,10 +12,12 @@ public class TestBossFight extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        BossFight root = new BossFight();
-        Scene scene = new Scene(root, 800, 600);
-        primaryStage.setTitle("Boss");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        try {
+            BossFight bossFight = BossFight.getInstance();
+            primaryStage = bossFight.getMainStage();
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

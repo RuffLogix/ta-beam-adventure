@@ -133,7 +133,7 @@ public class GameViewManager {
                 case "s" -> player.setVerticalDirection(1);
                 case "a" -> player.setHorizontalDirection(-1);
                 case "d" -> player.setHorizontalDirection(1);
-                case "m" -> marketSubScene.toggle();
+               
             }
         });
 
