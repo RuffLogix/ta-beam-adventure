@@ -24,7 +24,7 @@ public class AttackButton extends HBox {
         Image r = new Image(ClassLoader.getSystemResource("rock.jpg").toString());
         Image p = new Image(ClassLoader.getSystemResource("paper.jpg").toString());
         Image s = new Image(ClassLoader.getSystemResource("scissors.jpg").toString());
-//        explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
+        explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
         Button scissors = Btn(s, UnitUtils.Outcome.SCISSORS);
         Button rock = Btn(r, UnitUtils.Outcome.ROCK);
         Button paper = Btn(p, UnitUtils.Outcome.PAPER);
@@ -65,11 +65,11 @@ public class AttackButton extends HBox {
                 BossFight.statusBox.getGraphicsContext2D().clearRect(0,0,300,400);
                 Status.drawStatusBox(BossFight.statusBox);
                 Status.drawStatusMsg(BossFight.statusBox);
-//                explosionSound.play();
+                explosionSound.play();
 
                 if(attackedBoss.getHp()==0){
-                    Status.drawBossConquered(boosfight);
                     Player.level += 1;
+                    Status.drawBossConquered(boosfight);
                     Player.getInstance().setCoin(Player.getInstance().getCoin() + Math.min(Player.level*5,100));
                 }
                 else if(Player.getHp() == 0){
