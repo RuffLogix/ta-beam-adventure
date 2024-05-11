@@ -1,5 +1,7 @@
 package component.player;
 
+import component.bossFight.Boss;
+import component.bossFight.UnitUtils;
 import component.item.equipment.Amulet;
 import component.item.equipment.Armor;
 import component.item.equipment.Weapon;
@@ -27,7 +29,7 @@ public class Player {
     private static Player instance;
     public static final int MAX_HP = 100;
 
-    private int hp;
+    private static int hp = MAX_HP;
     private Armor armor;
     private Amulet amulet;
     private Weapon weapon;
@@ -126,7 +128,7 @@ public class Player {
         return position;
     }
 
-    public int getHp() {
+    public static int getHp() {
         return hp;
     }
 
@@ -181,4 +183,25 @@ public class Player {
     public int getAtk() {
         return damage + (weapon == null ? 0 : weapon.getDamage());
     }
+
+    private int attack(Boss boss){
+        int calculatedDamage = 0;
+        return calculatedDamage;
+    }
+    public static UnitUtils.Result getResult(Boss boss, UnitUtils.Outcome myChoice){
+        UnitUtils.Result myResult;
+        if(UnitUtils.evaluate(myChoice,boss.getChoice()) == 1){myResult = UnitUtils.Result.WIN;}
+        else if (UnitUtils.evaluate(myChoice,boss.getChoice()) == 0) {
+            myResult = UnitUtils.Result.DRAW;
+        }
+        else{myResult = UnitUtils.Result.LOSS;}
+        return myResult;
+    }
+
+    public static void setHp(int hp) {
+        if(hp > MAX_HP){hp = MAX_HP;}
+        Player.hp = Math.max(0,hp);
+    }
+
+
 }
