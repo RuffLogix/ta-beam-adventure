@@ -34,7 +34,7 @@ public class Player {
     private Armor armor;
     private Amulet amulet;
     private Weapon weapon;
-    private int damage = 3;
+    private int damage = 5;
 
     public static Player getInstance() {
         if (instance == null) instance = new Player();
