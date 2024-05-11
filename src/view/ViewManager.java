@@ -1,5 +1,7 @@
 package view;
 
+import component.inventory.Inventory;
+import component.player.Player;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -75,6 +77,9 @@ public class ViewManager {
         mainPane.getChildren().add(startButton);
 
         startButton.setOnAction(e -> {
+            Inventory.getInstance().reset();
+            Player.getInstance().reset();
+            GameViewManager.getInstance().reset();
             GameViewManager.getInstance().createNewGame(mainStage);
         });
     }

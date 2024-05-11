@@ -207,5 +207,8 @@ public class Player {
         Player.hp = Math.max(0,hp);
     }
 
-
+    public void reset() {
+        initialPlayer();
+        render();
+    }
 }

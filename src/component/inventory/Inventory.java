@@ -46,7 +46,6 @@ public class Inventory extends GridPane {
         slots.add(new Slot(new RefineIron()));
         slots.add(new Slot(new RefineIron()));
 
-
         setHgap(2);
         setVgap(2);
 
@@ -75,5 +74,10 @@ public class Inventory extends GridPane {
 
     public ArrayList<Slot> getSlots() {
         return slots;
+    }
+
+    public void reset() {
+        initialInventory();
+        updateInventory();
     }
 }
