@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class BossPane extends VBox {
@@ -24,7 +25,7 @@ public class BossPane extends VBox {
         ImageView bossImg = boss.getImageView();
         Text hpText = new Text("Your HP: "+ Player.getHp()+" VS  Boss HP: " + boss.getHp());
         hpText.setFill(Color.WHITE);
-        hpText.setFont(new Font(30));
+        hpText.setFont(Font.font("Verdana", FontWeight.BOLD,30));
         hpText.setStroke(Color.BLACK);
         atk = new AttackButton(boss,bossFight);
         this.bossHpText = hpText;

@@ -2,10 +2,15 @@ package view;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -34,6 +39,18 @@ public class ViewManager {
 
     private void createMainStage() {
         mainPane = new AnchorPane();
+        Image img =  new Image(ClassLoader.getSystemResource("cover.jpg").toString());
+        BackgroundImage bImg = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(800,600,true,true,true,true));
+        Background bGround = new Background(bImg);
+        mainPane.setBackground(bGround);
+        Text name = new Text("AJ.TOE'S ADVENTURE");
+        name.setFont(Font.font("Verdana", FontWeight.BOLD,40));
+        name.setFill(Color.WHITE);
+        name.setStroke(Color.BLACK);
+        name.setLayoutX(170);
+        name.setLayoutY(150);
+        mainPane.getChildren().add(name);
         mainScene = new Scene(mainPane, WINDOW_WIDTH, WINDOW_HEIGHT);
         mainStage = new Stage();
         mainStage.setResizable(false);
@@ -51,8 +68,10 @@ public class ViewManager {
 
     private void createStartButton() {
         startButton = new Button("Start");
-        startButton.setLayoutX(400);
-        startButton.setLayoutY(300);
+        startButton.setLayoutX(300);
+        startButton.setLayoutY(500);
+        startButton.setFont(new Font(20));
+        startButton.setPrefSize(100,50);
         mainPane.getChildren().add(startButton);
 
         startButton.setOnAction(e -> {
@@ -62,8 +81,10 @@ public class ViewManager {
 
     private void createExitButton() {
         exitButton = new Button("Exit");
-        exitButton.setLayoutX(400);
-        exitButton.setLayoutY(350);
+        exitButton.setLayoutX(450);
+        exitButton.setLayoutY(500);
+        exitButton.setFont(new Font(20));
+        exitButton.setPrefSize(100,50);
         mainPane.getChildren().add(exitButton);
 
         exitButton.setOnAction(e -> {

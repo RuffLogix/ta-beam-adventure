@@ -10,7 +10,7 @@ public abstract class Boss{
     private int level;
     private UnitUtils.Outcome choice;
     public Boss(){
-        setHp(Player.level*20);
+        setHp(Player.level*100);
         setPower(5);
         setLevel(1);
     }
