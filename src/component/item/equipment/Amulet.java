@@ -9,5 +9,6 @@ public class Amulet extends Equipment {
     private static WritableImage writableImage = new WritableImage(IMAGE.getPixelReader(), 199, 195, 40, 47);
     public Amulet() {
         super("Amulet", writableImage);
+        durability = 250;
     }
 }

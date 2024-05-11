@@ -1,5 +1,8 @@
 package component.player;
 
+import component.item.equipment.Amulet;
+import component.item.equipment.Armor;
+import component.item.equipment.Weapon;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,6 +28,10 @@ public class Player {
     public static final int MAX_HP = 100;
 
     private int hp;
+    private Armor armor;
+    private Amulet amulet;
+    private Weapon weapon;
+    private int damage = 3;
 
     public static Player getInstance() {
         if (instance == null) instance = new Player();
@@ -125,5 +132,53 @@ public class Player {
 
     public void heal(int amount) {
         hp = Math.min(hp + amount, MAX_HP);
+    }
+
+    public void takeDamage(int amount) {
+        if (armor != null) {
+            amount = Math.max(0, amount - armor.getDefense());
+            armor.decreaseDurability();
+        }
+        hp = Math.max(0, hp - amount);
+    }
+
+    public void useWeapon() {
+        if (weapon != null) {
+            weapon.decreaseDurability();
+        }
+    }
+
+    public void useAmulet() {
+        if (amulet != null) {
+            amulet.decreaseDurability();
+        }
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
+
+    public void setAmulet(Amulet amulet) {
+        this.amulet = amulet;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public Amulet getAmulet() {
+        return amulet;
+    }
+
+    public int getAtk() {
+        return damage + (weapon == null ? 0 : weapon.getDamage());
     }
 }

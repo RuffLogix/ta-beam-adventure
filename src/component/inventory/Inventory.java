@@ -35,6 +35,7 @@ public class Inventory extends GridPane {
 
         slots.add(new Slot(new HpPotion(10)));
         slots.add(new Slot(new Armor()));
+        slots.add(new Slot(new Amulet()));
         slots.add(new Slot(new Weapon()));
         slots.add(new Slot(new HpPotion(20)));
         slots.add(new Slot(new Amulet()));
@@ -61,5 +62,9 @@ public class Inventory extends GridPane {
                 add(rectangle, i % 13, i / 13);
             }
         }
+    }
+
+    public ArrayList<Slot> getSlots() {
+        return slots;
     }
 }
