@@ -1,4 +1,4 @@
-package component.bossFight;//import item.HpPotion;
+package component.bossfight;//import item.HpPotion;
 //import item.Item;
 
 import javafx.scene.image.Image;

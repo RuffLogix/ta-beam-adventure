@@ -1,4 +1,4 @@
-package component.bossFight;
+package component.bossfight;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

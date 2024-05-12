@@ -1,14 +1,12 @@
-package component.bossFight;
+package component.bossfight;
 
 import javafx.beans.binding.DoubleBinding;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import view.ViewManager;
 
 import java.util.Arrays;
 import java.util.List;

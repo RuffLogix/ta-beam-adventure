@@ -1,7 +1,7 @@
 package component.player;
 
-import component.bossFight.Boss;
-import component.bossFight.UnitUtils;
+import component.bossfight.Boss;
+import component.bossfight.UnitUtils;
 import component.item.equipment.Amulet;
 import component.item.equipment.Armor;
 import component.item.equipment.Weapon;
@@ -9,7 +9,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.KeyCode;
 import view.GameViewManager;
 import view.ViewManager;
 
