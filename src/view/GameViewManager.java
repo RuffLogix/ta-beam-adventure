@@ -201,6 +201,8 @@ public class GameViewManager {
         gameTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
+                if ((int) (now/100000000) % 1000 == 0) dayNightLight.toDay();
+                if ((int) (now/100000000) % 1000 == 500) dayNightLight.toNight();
                 player.playerAnimation((int) (now/100000000));
                 player.update();
                 updateCamera();
