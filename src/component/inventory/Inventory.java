@@ -34,18 +34,6 @@ public class Inventory extends GridPane {
     private void initialInventory() {
         slots = new ArrayList<>();
 
-        slots.add(new Slot(new HpPotion(10)));
-        slots.add(new Slot(new Armor()));
-        slots.add(new Slot(new Amulet()));
-        slots.add(new Slot(new Weapon()));
-        slots.add(new Slot(new HpPotion(20)));
-        slots.add(new Slot(new Amulet()));
-        slots.add(new Slot(new RefineIron()));
-        slots.add(new Slot(new RefineIron()));
-        slots.add(new Slot(new RefineIron()));
-        slots.add(new Slot(new RefineIron()));
-        slots.add(new Slot(new RefineIron()));
-
         setHgap(2);
         setVgap(2);
 
