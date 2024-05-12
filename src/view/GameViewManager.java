@@ -1,6 +1,6 @@
 package view;
 
-import component.bossFight.BossFight;
+import component.bossfight.BossFight;
 import component.player.Player;
 import component.unit.Slime;
 import javafx.geometry.Point2D;
