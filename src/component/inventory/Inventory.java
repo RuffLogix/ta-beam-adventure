@@ -16,7 +16,6 @@ public class Inventory extends GridPane {
     private static Inventory instance;
     private static ArrayList<Slot> slots;
     private static final int INVENTORY_SIZE = 39;
-    private static AnimationTimer timer;
 
     public static Inventory getInstance() {
         if (instance == null) {
