@@ -20,7 +20,7 @@ public class Amulet extends Equipment {
         if (tier==EquipmentUtils.TIER.Gold) return ;
 
         super.upgrade(useIron);
-        probability += 0.1;
+        probability += 0.05;
         if (tier==EquipmentUtils.TIER.Silver) durability = 15;
         else if (tier==EquipmentUtils.TIER.Gold) durability = 25;
     }
