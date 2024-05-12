@@ -11,6 +11,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import subscene.MarketSubScene;
 import view.GameViewManager;
 import view.ViewManager;
 
@@ -119,6 +120,8 @@ public class Status {
         // back
         backButton.setOnMouseClicked(e -> {
             GameViewManager.getInstance().getGameStage().show();
+            GameViewManager.getInstance().renderSlime(10);
+            MarketSubScene.createMarketItems();
             BossFight.getMainStage().close();
         });
         //
