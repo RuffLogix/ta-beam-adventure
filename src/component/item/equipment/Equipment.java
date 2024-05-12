@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import utils.EquipmentUtils;
 
-public class Equipment extends Item implements Refinable {
+public abstract class Equipment extends Item implements Refinable {
     protected int durability;
     protected EquipmentUtils.TIER tier = EquipmentUtils.TIER.Bronze;
     public Equipment(String name, Image image) {
