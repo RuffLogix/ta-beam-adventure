@@ -10,6 +10,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import view.GameViewManager;
 import view.ViewManager;
 
@@ -58,8 +59,8 @@ public class Status {
         gc.setLineWidth(10.0);
         gc.setFill(Color.BLACK);
         gc.setStroke(Color.WHITE);
-        gc.strokeRoundRect(10, 10, 200, 300,20,20);
-        gc.fillRoundRect(10, 10, 200, 300,20,20);
+        gc.strokeRoundRect(10, 10, 200, 400,20,20);
+        gc.fillRoundRect(10, 10, 200, 400,20,20);
     }
     public static void drawStatusMsg(Canvas canvas){
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -68,13 +69,32 @@ public class Status {
         gc.fillText("Boss level: "+Player.level,20,40);
         gc.fillText("Your Equipment:",20,70);
 
+        gc.setFont(new Font(17));
         String armorName = Player.getInstance().getArmor()!=null ? Player.getInstance().getArmor().getName() : "None";
         String weaponName = Player.getInstance().getWeapon()!=null ? Player.getInstance().getWeapon().getName() : "None";
         String amuletName = Player.getInstance().getAmulet()!=null ? Player.getInstance().getAmulet().getName() : "None";
+        gc.fillText("Armor : "+armorName ,20,100);
+        gc.fillText("Weapon : "+weaponName ,20,200);
+        gc.fillText("Amulet : "+amuletName ,20,300);
 
-        gc.fillText("Armor:"+armorName,20,130);
-        gc.fillText("Weapon:"+weaponName,20,160);
-        gc.fillText("Amulet:"+amuletName,20,190);
+        int armorDu = Player.getInstance().getArmor()!=null ? Player.getInstance().getArmor().getDurability() : 0;
+        int weaponDu = Player.getInstance().getWeapon()!=null ? Player.getInstance().getWeapon().getDurability() : 0;
+        int amuletDu = Player.getInstance().getAmulet()!=null ? Player.getInstance().getAmulet().getDurability() : 0;
+        gc.setFont(new Font(15));
+        if(Player.getInstance().getArmor()!=null){
+            gc.fillText("Durability: " +armorDu,20,130);
+            gc.drawImage(Player.getInstance().getArmor().getImage(),20,140,30,30);
+        }
+        if(Player.getInstance().getWeapon()!=null){
+            gc.fillText("Durability: " +weaponDu,20,230);
+            gc.drawImage(Player.getInstance().getWeapon().getImage(),20,240,30,30);
+        }
+        if(Player.getInstance().getAmulet()!=null){
+            gc.fillText("Durability: " +amuletDu,20,330);
+            gc.drawImage(Player.getInstance().getAmulet().getImage(),20,340,30,30);
+        }
+
+
     }
     public static void drawBossConquered(BossFight bossFight){
         Canvas canvas = new Canvas(800,600);
@@ -138,8 +158,9 @@ public class Status {
     }
     public static void drawLastResultMsg(Label t){
         t.setTextFill(Color.WHITE);
-        t.setFont(new Font(16));
-        t.setText("Last result: "+ BossFight.myChoice+ " VS "+ BossPane.boss.getChoice() + ", "+ BossPane.atk.myResult);
-        t.setBackground(new Background(new BackgroundFill(Color.DARKGRAY,null,null)));
+        t.setFont(Font.font("Verdana", FontWeight.BOLD,16));
+        t.setText(BossFight.myChoice+ " VS "+ BossPane.boss.getChoice() + ", "+ BossPane.atk.myResult);
+        t.setBackground(new Background(new BackgroundFill(Color.rgb(188,158,130),null,null)));
+
     }
 }

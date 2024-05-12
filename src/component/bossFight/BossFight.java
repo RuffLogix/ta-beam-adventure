@@ -19,9 +19,8 @@ public class BossFight extends StackPane {
   private static BossFight instance;
   private static Stage mainStage;
   public static Pane mainPane;
-  public static Canvas statusBox = new Canvas(250,400);
-  public static Label resultMsg = new Label();
-  public static Label lastResultMsg = new Label();
+  public static Canvas statusBox = new Canvas(250,420);
+  public static Label lastResultMsg;
   public static Canvas resultImg = new Canvas(220,150);
   public static UnitUtils.Outcome myChoice;
 
@@ -41,16 +40,16 @@ public class BossFight extends StackPane {
 
         Status.drawStatusBox(statusBox);
         Status.drawStatusMsg(statusBox);
+        lastResultMsg = new Label();
 
         DoubleBinding sx = statusBox.widthProperty().add(30);
         DoubleBinding sy= statusBox.heightProperty().subtract(450);
         statusBox.translateXProperty().bind(sx);
         statusBox.translateYProperty().bind(sy);
-        lastResultMsg.translateXProperty().bind(sx.subtract(40));
-        lastResultMsg.translateYProperty().bind(sy.add(150));
+        lastResultMsg.translateXProperty().bind(sx.subtract(520));
+        lastResultMsg.translateYProperty().bind(sy.add(180));
         mainPane.getChildren().add(bosspane);
         mainPane.getChildren().add(statusBox);
-        mainPane.getChildren().add(resultMsg);
         mainPane.getChildren().add(lastResultMsg);
         mainPane.getChildren().add(resultImg);
 

@@ -61,7 +61,7 @@ public class AttackButton extends HBox {
                 }
                 Player.getInstance().useAmulet();
 
-                BossPane.bossHpText.setText("Your HP: "+ Player.getHp()+" VS  Boss HP: " + attackedBoss.getHp());
+                BossPane.bossHpText.setText("Your HP: "+ Player.getHp() +"/100"+" VS  Boss HP: " + attackedBoss.getHp() +"/"+attackedBoss.MAX_HP);
                 BossFight.statusBox.getGraphicsContext2D().clearRect(0,0,300,400);
                 Status.drawStatusBox(BossFight.statusBox);
                 Status.drawStatusMsg(BossFight.statusBox);
