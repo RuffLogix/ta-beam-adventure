@@ -46,7 +46,18 @@ public class AttackButton extends HBox {
             public void handle(MouseEvent event) {
                 BossFight.myChoice = myChoice;
                 // boss starts shooting
-                attackedBoss.shoot();
+                if (Player.getInstance().getAmulet()!=null && Player.getInstance().getAmulet().getProbability() < Math.random()) {
+                    if (myChoice == UnitUtils.Outcome.ROCK) {
+                        attackedBoss.setChoice(UnitUtils.Outcome.SCISSORS);
+                    } else if (myChoice == UnitUtils.Outcome.PAPER) {
+                        attackedBoss.setChoice(UnitUtils.Outcome.ROCK);
+                    } else {
+                        attackedBoss.setChoice(UnitUtils.Outcome.PAPER);
+                    }
+                } else {
+                    attackedBoss.shoot();
+                }
+
                 // get the result;
                 myResult = Player.getResult(attackedBoss, myChoice);
                 Status.drawLastResultMsg(BossFight.lastResultMsg);

@@ -55,6 +55,7 @@ public class Player {
 
     private void initialPlayer() {
         hp = MAX_HP;
+        coin = 0;
         playerSpeed = 5;
         position = new Point2D(ViewManager.WINDOW_WIDTH / 2.0, ViewManager.WINDOW_HEIGHT / 2.0);
         level = 1;

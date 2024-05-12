@@ -2,5 +2,5 @@ package component.item.equipment;
 
 @FunctionalInterface
 interface Refinable {
-    void upgrade();
+    void upgrade(boolean useIron);
 }

@@ -2,9 +2,12 @@ package subscene;
 
 
 import component.item.HpPotion;
+import component.item.Item;
 import component.item.MarketItem;
+import component.item.RefineIron;
 import component.item.equipment.Amulet;
 import component.item.equipment.Armor;
+import component.item.equipment.Equipment;
 import component.item.equipment.Weapon;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,8 +20,9 @@ import java.util.ArrayList;
 
 public class MarketSubScene extends SubScene {
 
-    private ArrayList<MarketItem> marketItems;
-    private AnchorPane root;
+    private static ArrayList<MarketItem> marketItems;
+    private static ArrayList<Item> items;
+    private static AnchorPane root;
     public static Label notEnoughCoin;
 
     public MarketSubScene() {
@@ -30,26 +34,32 @@ public class MarketSubScene extends SubScene {
         root.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.5), null, null)));
         setVisible(false);
 
+        createItemList();
         createMarketItems();
     }
 
-    private void createMarketItems() {
+    private void createItemList() {
+        items = new ArrayList<>();
+
+        items.add(new Armor());
+        items.add(new Amulet());
+        items.add(new Weapon());
+        items.add(new HpPotion(10));
+        items.add(new RefineIron());
+    }
+
+    public static void createMarketItems() {
+        root.getChildren().clear();
         marketItems = new ArrayList<>();
 
-        Armor item1 = new Armor();
-        Amulet item2 = new Amulet();
-        HpPotion item3 = new HpPotion(10);
-        Weapon item4 = new Weapon();
-
-        MarketItem marketItem1 = new MarketItem(item1, "This is an armor", 0);
-        MarketItem marketItem2 = new MarketItem(item2, "This is an amulet", 0);
-        MarketItem marketItem3 = new MarketItem(item3, "This is a potion", 10);
-        MarketItem marketItem4 = new MarketItem(item4, "This is a weapon", 0);
-
-        marketItems.add(marketItem1);
-        marketItems.add(marketItem2);
-        marketItems.add(marketItem3);
-        marketItems.add(marketItem4);
+        for (int i=0; i<4; i++) {
+            Item item = items.get((int)(Math.random()*items.size()));
+            if (item instanceof Equipment) {
+                if (Math.random() < 0.2) ((Equipment) item).upgrade(false);
+                if (Math.random() < 0.1) ((Equipment) item).upgrade(false);
+            }
+            marketItems.add(new MarketItem(item, "This is an item", (int) (Math.random() * 25)));
+        }
 
         Label marketTitle = new Label("Market");
         marketTitle.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");

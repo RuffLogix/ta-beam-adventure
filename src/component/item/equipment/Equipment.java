@@ -65,18 +65,19 @@ public class Equipment extends Item implements Refinable {
     }
 
     @Override
-    public void upgrade() {
-        if (tier == EquipmentUtils.TIER.Gold) return ;
-        boolean found = false;
-        for (Slot slot: Inventory.getInstance().getSlots()) {
-            if (slot.getItem() instanceof RefineIron) {
-                Inventory.getInstance().getSlots().remove(slot);
-                found = true;
-                break;
+    public void upgrade(boolean useIron) {
+        if (useIron) {
+            if (tier == EquipmentUtils.TIER.Gold) return;
+            boolean found = false;
+            for (Slot slot : Inventory.getInstance().getSlots()) {
+                if (slot.getItem() instanceof RefineIron) {
+                    Inventory.getInstance().getSlots().remove(slot);
+                    found = true;
+                    break;
+                }
             }
+            if (!found) return;
         }
-        if (!found) return ;
-
 
         name = name + "+";
         if(tier == EquipmentUtils.TIER.Bronze){tier = EquipmentUtils.TIER.Silver;}

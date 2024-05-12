@@ -88,7 +88,7 @@ public class GameViewManager {
         grass2ResourcePath = ClassLoader.getSystemResource("material/grass2.jpg").toString();
     }
 
-    private void renderSlime(int n) {
+    public void renderSlime(int n) {
         for (int i=0; i<n; i++) {
             Slime slime = new Slime();
             slime.setPosition(new Point2D(Math.random() * 1500, Math.random() * 1200));
@@ -148,11 +148,11 @@ public class GameViewManager {
             } else if (e.getCharacter().equals("d")) {
                 if (!marketSubScene.isVisible()) player.setHorizontalDirection(1);
             } else if (e.getCharacter().equals("1")) {
-                if (Player.getInstance().getArmor() != null) Player.getInstance().getArmor().upgrade();
+                if (Player.getInstance().getArmor() != null) Player.getInstance().getArmor().upgrade(true);
             } else if (e.getCharacter().equals("2")) {
-                if (Player.getInstance().getWeapon() != null) Player.getInstance().getWeapon().upgrade();
+                if (Player.getInstance().getWeapon() != null) Player.getInstance().getWeapon().upgrade(true);
             } else if (e.getCharacter().equals("3")) {
-                if (Player.getInstance().getAmulet() != null) Player.getInstance().getAmulet().upgrade();
+                if (Player.getInstance().getAmulet() != null) Player.getInstance().getAmulet().upgrade(true);
             } else if (e.getCharacter().equals("m")) {
                 marketSubScene.toggle();
             }

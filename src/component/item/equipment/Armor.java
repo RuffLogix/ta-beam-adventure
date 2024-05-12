@@ -11,8 +11,6 @@ public class Armor extends Equipment {
     public Armor() {
         super("Armor", null);
         super.setImage(writableImage);
-        durability = 3;
-        defense = 10;
     }
 
     public int getDefense() {
@@ -20,11 +18,12 @@ public class Armor extends Equipment {
     }
 
     @Override
-    public void upgrade() {
+    public void upgrade(boolean useIron) {
         if (tier==EquipmentUtils.TIER.Gold) return ;
-
-        super.upgrade();
+        super.upgrade(useIron);
         defense += 10;
-        durability = 5;
+        if (tier==EquipmentUtils.TIER.Bronze) durability = 3;
+        else if (tier==EquipmentUtils.TIER.Silver) durability = 5;
+        else if (tier==EquipmentUtils.TIER.Gold) durability = 10;
     }
 }

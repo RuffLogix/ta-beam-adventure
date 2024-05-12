@@ -19,11 +19,12 @@ public class Weapon extends Equipment {
     }
 
     @Override
-    public void upgrade() {
+    public void upgrade(boolean useIron) {
         if (tier==EquipmentUtils.TIER.Gold) return ;
 
-        super.upgrade();
+        super.upgrade(useIron);
         damage += 5;
-        durability = 7;
+        if (tier==EquipmentUtils.TIER.Silver) durability = 7;
+        else if (tier==EquipmentUtils.TIER.Gold) durability = 15;
     }
 }
