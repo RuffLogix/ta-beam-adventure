@@ -19,11 +19,11 @@ public class UnitUtils {
         LOSS,
         DRAW
     }
-    public static Outcome generateOutcome(double probRock, double proPaper, double probScissors){
+    public static Outcome generateOutcome(double probRock, double probPaper, double probScissors){
         Outcome outcome;
         double randomNumber = Math.random();
         if(randomNumber <= probRock){outcome = Outcome.ROCK;}
-        else if(randomNumber <= probRock+proPaper){outcome = Outcome.PAPER;}
+        else if(randomNumber <= probRock+probPaper){outcome = Outcome.PAPER;}
         else{outcome = Outcome.SCISSORS;}
         return outcome;
     }

@@ -23,7 +23,7 @@ public class BossPane extends VBox {
         Background bGround = new Background(bImg);
         setBackground(bGround);
         ImageView bossImg = boss.getImageView();
-        Text hpText = new Text("Your HP: "+ Player.getHp()+"/100"+" VS  Boss HP: " + boss.getHp() +"/"+boss.MAX_HP);
+        Text hpText = new Text("Your HP: "+ Player.getHp()+"/100"+" VS  Boss HP: " + boss.getHp() +"/"+boss.max_hp);
         hpText.setFill(Color.WHITE);
         hpText.setFont(Font.font("Verdana", FontWeight.BOLD,30));
         hpText.setStroke(Color.BLACK);

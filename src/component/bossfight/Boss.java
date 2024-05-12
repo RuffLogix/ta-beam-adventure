@@ -9,10 +9,10 @@ public abstract class Boss{
     private int power;
     private int level;
     private UnitUtils.Outcome choice;
-    public static int MAX_HP;
+    public static int max_hp;
     public Boss(){
-        MAX_HP = Player.level*50;
-        setHp(MAX_HP);
+        max_hp = Player.level*50;
+        setHp(max_hp);
         setPower(5);
         setLevel(1);
     }

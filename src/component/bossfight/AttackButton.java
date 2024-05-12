@@ -14,12 +14,12 @@ import javafx.scene.text.Font;
 
 public class AttackButton extends HBox {
     private Boss attackedBoss;
-    private BossFight boosfight;
+    private BossFight bossFight;
     public  UnitUtils.Result myResult;
     private AudioClip explosionSound;
     public AttackButton(Boss boss, BossFight bossFight){
         attackedBoss = boss;
-        this.boosfight = bossFight;
+        this.bossFight = bossFight;
         this.setAlignment(Pos.BOTTOM_CENTER);
         Image r = new Image(ClassLoader.getSystemResource("rock.jpg").toString());
         Image p = new Image(ClassLoader.getSystemResource("paper.jpg").toString());
@@ -72,7 +72,7 @@ public class AttackButton extends HBox {
                 }
                 Player.getInstance().useAmulet();
 
-                BossPane.bossHpText.setText("Your HP: "+ Player.getHp() +"/100"+" VS  Boss HP: " + attackedBoss.getHp() +"/"+attackedBoss.MAX_HP);
+                BossPane.bossHpText.setText("Your HP: "+ Player.getHp() +"/100"+" VS  Boss HP: " + attackedBoss.getHp() +"/"+attackedBoss.max_hp);
                 BossFight.statusBox.getGraphicsContext2D().clearRect(0,0,300,400);
                 Status.drawStatusBox(BossFight.statusBox);
                 Status.drawStatusMsg(BossFight.statusBox);
@@ -80,11 +80,11 @@ public class AttackButton extends HBox {
 
                 if(attackedBoss.getHp()==0){
                     Player.level += 1;
-                    Status.drawBossConquered(boosfight);
+                    Status.drawBossConquered(bossFight);
                     Player.getInstance().setCoin(Player.getInstance().getCoin() + Math.min(Player.level*5,100));
                 }
                 else if(Player.getHp() == 0){
-                    Status.drawGameOver(boosfight);
+                    Status.drawGameOver(bossFight);
                 }
             }
         });

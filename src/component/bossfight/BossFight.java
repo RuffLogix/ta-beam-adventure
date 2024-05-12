@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 public class BossFight extends StackPane {
-  private BossPane bosspane;
+  private BossPane bossPane;
   private static BossFight instance;
   private static Stage mainStage;
   public static Pane mainPane;
@@ -34,7 +34,7 @@ public class BossFight extends StackPane {
         List<Boss> list = Arrays.asList(new ChickenBoss(),new PigBoss(), new SheepBoss(), new RabbitBoss());
         Random random = new Random();
         Boss randomBoss = list.get(random.nextInt(list.size()));
-        bosspane = new BossPane(randomBoss,this);
+        bossPane = new BossPane(randomBoss,this);
 
         Status.drawStatusBox(statusBox);
         Status.drawStatusMsg(statusBox);
@@ -46,7 +46,7 @@ public class BossFight extends StackPane {
         statusBox.translateYProperty().bind(sy);
         lastResultMsg.translateXProperty().bind(sx.subtract(520));
         lastResultMsg.translateYProperty().bind(sy.add(180));
-        mainPane.getChildren().add(bosspane);
+        mainPane.getChildren().add(bossPane);
         mainPane.getChildren().add(statusBox);
         mainPane.getChildren().add(lastResultMsg);
         mainPane.getChildren().add(resultImg);
