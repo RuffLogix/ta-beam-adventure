@@ -57,6 +57,8 @@ public class Player {
         hp = MAX_HP;
         playerSpeed = 5;
         position = new Point2D(ViewManager.WINDOW_WIDTH / 2.0, ViewManager.WINDOW_HEIGHT / 2.0);
+        level = 1;
+        coin = 0;
     }
 
     private void render() {

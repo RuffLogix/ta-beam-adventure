@@ -12,7 +12,7 @@ public class Armor extends Equipment {
         super("Armor", null);
         super.setImage(writableImage);
         durability = 3;
-        defense = 5;
+        defense = 10;
     }
 
     public int getDefense() {
@@ -24,7 +24,7 @@ public class Armor extends Equipment {
         if (tier==EquipmentUtils.TIER.Gold) return ;
 
         super.upgrade();
-        defense += 5;
+        defense += 10;
         durability = 5;
     }
 }
