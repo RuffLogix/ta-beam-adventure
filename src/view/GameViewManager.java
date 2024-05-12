@@ -3,27 +3,21 @@ package view;
 import component.bossFight.BossFight;
 import component.player.Player;
 import component.unit.Slime;
-import javafx.animation.FadeTransition;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 import subscene.InventorySubScene;
 import subscene.MarketSubScene;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import utils.DayNightLight;
+import utils.TileRenderer;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -66,10 +60,10 @@ public class GameViewManager {
         loadResources();
         renderTile();
         createDayNightLight();
-        renderSlime(Math.max((int) (Math.random() * 50), 20));
 
         createSubScenes();
         createTeleport();
+        renderSlime(Math.max((int) (Math.random() * 50), 20));
         playerLevel = new Text();
         playerLevel.setText("Level: " + Player.level);
         playerLevel.setFill(Color.WHITE);
@@ -109,17 +103,7 @@ public class GameViewManager {
                 int j=0;
                 for (char c : data.toCharArray()) {
                     if (c==' ') continue;
-
-                    Image image = null;
-
-                    if (c == '0') {
-                        image = new Image(stoneResourcePath);
-                    } else if (c == '1') {
-                        image = new Image(grass1ResourcePath);
-                    } else if (c == '2') {
-                        image = new Image(grass2ResourcePath);
-                    }
-
+                    Image image = TileRenderer.getTile(c);
                     ImageView imageView = new ImageView(image);
                     imageView.setFitWidth(TILE_SIZE/2);
                     imageView.setFitHeight(TILE_SIZE/2);
@@ -187,6 +171,7 @@ public class GameViewManager {
     private void createTeleport() {
         Image image = new Image(ClassLoader.getSystemResource("sprite/teleport.png").toString());
         ImageView imageView = new ImageView(image);
+        imageView.setOpacity(0.5);
 
         imageView.setLayoutX(1150);
         imageView.setLayoutY(-125);

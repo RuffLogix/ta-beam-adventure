@@ -1,10 +1,12 @@
 @startuml
 class subscene.MarketSubScene {
-- ArrayList<MarketItem> marketItems
-- AnchorPane root
+- {static} ArrayList<MarketItem> marketItems
+- {static} ArrayList<Item> items
+- {static} AnchorPane root
 + {static} Label notEnoughCoin
 + <<Create>> MarketSubScene()
-- void createMarketItems()
+- void createItemList()
++ {static} void createMarketItems()
 + void toggle()
 }
 class component.bossFight.Status {
@@ -34,7 +36,10 @@ abstract class component.unit.BasedUnit {
 }
 class component.item.equipment.Amulet {
 - WritableImage writableImage
+- double probability
 + <<Create>> Amulet()
++ void upgrade(boolean)
++ double getProbability()
 }
 interface component.item.IUsable {
 ~ void use()
@@ -46,7 +51,7 @@ class component.item.equipment.Equipment {
 + void use()
 + int getDurability()
 + void decreaseDurability()
-+ void upgrade()
++ void upgrade(boolean)
 + EquipmentUtils.TIER getTier()
 }
 class view.ViewManager {
@@ -69,6 +74,8 @@ class view.ViewManager {
 class utils.EquipmentUtils {
 - {static} String IMAGE_PATH
 - {static} Image IMAGE
+- {static} String IMAGE_PATH2
+- {static} Image IMAGE2
 + {static} Image getImage(Equipment)
 + {static} Image getRefineIronImage()
 }
@@ -92,7 +99,7 @@ class component.item.equipment.Weapon {
 - int damage
 + <<Create>> Weapon()
 + int getDamage()
-+ void upgrade()
++ void upgrade(boolean)
 }
 class component.bossFight.UnitUtils {
 + {static} Outcome generateOutcome(double,double,double)
@@ -134,6 +141,10 @@ class component.bossFight.RabbitBoss {
 + void shoot()
 }
 class utils.TileRenderer {
+- {static} String filePath
+- {static} Image tileSet
++ {static} int TILE_SIZE
++ {static} Image getTile(char)
 }
 class application.Main {
 + {static} void main(String[])
@@ -163,6 +174,7 @@ abstract class component.bossFight.Boss {
 - int power
 - int level
 - UnitUtils.Outcome choice
++ {static} int MAX_HP
 + <<Create>> Boss()
 + int getPower()
 + void setPower(int)
@@ -189,7 +201,7 @@ class component.item.equipment.Armor {
 - int defense
 + <<Create>> Armor()
 + int getDefense()
-+ void upgrade()
++ void upgrade(boolean)
 }
 class utils.DayNightLight {
 - FadeTransition toNightTransition
@@ -243,7 +255,7 @@ class view.GameViewManager {
 - void initialGameStage()
 - void createDayNightLight()
 - void loadResources()
-- void renderSlime(int)
++ void renderSlime(int)
 - void renderTile()
 - void createListeners()
 - void createGameStage()
@@ -267,7 +279,7 @@ class component.item.HpPotion {
 + void setHealAmount(int)
 }
 interface component.item.equipment.Refinable {
-~ void upgrade()
+~ void upgrade(boolean)
 }
 class component.player.Player {
 - Point2D position
@@ -327,7 +339,6 @@ class component.bossFight.BossFight {
 - {static} Stage mainStage
 + {static} Pane mainPane
 + {static} Canvas statusBox
-+ {static} Label resultMsg
 + {static} Label lastResultMsg
 + {static} Canvas resultImg
 + {static} UnitUtils.Outcome myChoice
