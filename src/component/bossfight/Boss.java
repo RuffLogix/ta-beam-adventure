@@ -1,4 +1,4 @@
-package component.bossFight;
+package component.bossfight;
 
 import component.player.Player;
 import javafx.scene.image.ImageView;
@@ -7,10 +7,10 @@ public abstract class Boss{
     private int hp;
     private ImageView imageView;
     private UnitUtils.Outcome choice;
-    public static int MAX_HP;
+    public static int max_hp;
     public Boss(){
-        MAX_HP = Player.level*50;
-        setHp(MAX_HP);
+       max_hp = Player.level*50;
+        setHp(max_hp);
     }
 
     public void setChoice(UnitUtils.Outcome choice) {

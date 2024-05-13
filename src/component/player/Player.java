@@ -1,7 +1,7 @@
 package component.player;
 
-import component.bossFight.Boss;
-import component.bossFight.UnitUtils;
+import component.bossfight.Boss;
+import component.bossfight.UnitUtils;
 import component.item.equipment.Amulet;
 import component.item.equipment.Armor;
 import component.item.equipment.Weapon;
@@ -9,7 +9,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.KeyCode;
 import view.GameViewManager;
 import view.ViewManager;
 
@@ -59,6 +58,9 @@ public class Player {
         position = new Point2D(ViewManager.WINDOW_WIDTH / 2.0, ViewManager.WINDOW_HEIGHT / 2.0);
         level = 1;
         coin = 0;
+        setAmulet(null);
+        setArmor(null);
+        setWeapon(null);
     }
 
     private void render() {

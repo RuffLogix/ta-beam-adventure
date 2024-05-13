@@ -1,4 +1,4 @@
-package component.bossFight;
+package component.bossfight;
 
 import javafx.animation.FadeTransition;
 import javafx.scene.control.Button;

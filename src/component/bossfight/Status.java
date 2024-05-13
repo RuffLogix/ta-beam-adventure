@@ -1,4 +1,4 @@
-package component.bossFight;
+package component.bossfight;
 
 import component.player.Player;
 import javafx.scene.canvas.Canvas;

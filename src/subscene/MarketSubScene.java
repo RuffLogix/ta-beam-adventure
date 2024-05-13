@@ -70,15 +70,14 @@ public class MarketSubScene extends SubScene {
         container.setPadding(new Insets(20));
         container.getChildren().add(marketTitle);
 
+        notEnoughCoin = new Label("Not enough coin");
+        notEnoughCoin.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: red;");
+        notEnoughCoin.setVisible(false);
+        container.getChildren().add(notEnoughCoin);
+
         for (MarketItem item : marketItems) {
             container.getChildren().add(item.getItemLayout());
         }
-
-        notEnoughCoin = new Label("Not enough coin");
-        notEnoughCoin.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: red;");
-        notEnoughCoin.setPadding(new Insets(10));
-        notEnoughCoin.setVisible(false);
-        container.getChildren().add(notEnoughCoin);
 
         root.getChildren().add(container);
     }

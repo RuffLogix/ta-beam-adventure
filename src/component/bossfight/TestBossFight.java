@@ -1,4 +1,4 @@
-package component.bossFight;
+package component.bossfight;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
