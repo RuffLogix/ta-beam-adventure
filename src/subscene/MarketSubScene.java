@@ -53,12 +53,16 @@ public class MarketSubScene extends SubScene {
         marketItems = new ArrayList<>();
 
         for (int i=0; i<4; i++) {
-            Item item = items.get((int)(Math.random()*items.size()));
-            if (item instanceof Equipment) {
-                if (Math.random() < 0.2) ((Equipment) item).upgrade(false);
-                if (Math.random() < 0.1) ((Equipment) item).upgrade(false);
+            try {
+                Item item = (Item) items.get((int) (Math.random() * items.size())).clone();
+                if (item instanceof Equipment) {
+                    if (Math.random() < 0.2) ((Equipment) item).upgrade(false);
+                    if (Math.random() < 0.1) ((Equipment) item).upgrade(false);
+                }
+                marketItems.add(new MarketItem(item, "This is an item", (int) (Math.random() * 25)));
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
             }
-            marketItems.add(new MarketItem(item, "This is an item", (int) (Math.random() * 25)));
         }
 
         Label marketTitle = new Label("Market");
