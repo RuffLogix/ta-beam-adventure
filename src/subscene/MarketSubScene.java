@@ -21,7 +21,6 @@ import java.util.ArrayList;
 public class MarketSubScene extends SubScene {
 
     private static ArrayList<MarketItem> marketItems;
-    private static ArrayList<Item> items;
     private static AnchorPane root;
     public static Label notEnoughCoin;
 
@@ -34,18 +33,22 @@ public class MarketSubScene extends SubScene {
         root.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.5), null, null)));
         setVisible(false);
 
-        createItemList();
         createMarketItems();
     }
 
-    private void createItemList() {
-        items = new ArrayList<>();
-
-        items.add(new Armor());
-        items.add(new Amulet());
-        items.add(new Weapon());
-        items.add(new HpPotion(10));
-        items.add(new RefineIron());
+    private static Item createItem() {
+        double random = Math.random();
+        if (random < 0.2) {
+            return new Armor();
+        } else if (random < 0.4) {
+            return new Amulet();
+        } else if (random < 0.6) {
+            return new Weapon();
+        } else if (random < 0.8) {
+            return new HpPotion(10);
+        } else {
+            return new RefineIron();
+        }
     }
 
     public static void createMarketItems() {
@@ -53,16 +56,12 @@ public class MarketSubScene extends SubScene {
         marketItems = new ArrayList<>();
 
         for (int i=0; i<4; i++) {
-            try {
-                Item item = (Item) items.get((int) (Math.random() * items.size())).clone();
-                if (item instanceof Equipment) {
-                    if (Math.random() < 0.2) ((Equipment) item).upgrade(false);
-                    if (Math.random() < 0.1) ((Equipment) item).upgrade(false);
-                }
-                marketItems.add(new MarketItem(item, "This is an item", (int) (Math.random() * 10)));
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
+            Item item = createItem();
+            if (item instanceof Equipment) {
+                if (Math.random() < 0.2) ((Equipment) item).upgrade(false);
+                if (Math.random() < 0.1) ((Equipment) item).upgrade(false);
             }
+            marketItems.add(new MarketItem(item, "This is an item", (int) (Math.random() * 10)));
         }
 
         Label marketTitle = new Label("Market");
