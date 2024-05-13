@@ -1,6 +1,9 @@
 
 package component.bossfight;
+import component.item.Item;
 import javafx.scene.image.Image;
+
+import java.util.ArrayList;
 
 public class UnitUtils {
 
@@ -41,5 +44,27 @@ public class UnitUtils {
             image = new Image(ClassLoader.getSystemResource("s.png").toString());
         }
         return image;
+    }
+
+    public static ArrayList<Item> generateReward() {
+        ArrayList<Item> items = new ArrayList<Item>();
+        int n = (int) (Math.random() * 3) + 1;
+
+        for (int i=0; i<n; i++) {
+            double random = Math.random();
+            if (random < 0.2) {
+                items.add(new component.item.equipment.Armor());
+            } else if (random < 0.4) {
+                items.add(new component.item.equipment.Amulet());
+            } else if (random < 0.6) {
+                items.add(new component.item.equipment.Weapon());
+            } else if (random < 0.8) {
+                items.add(new component.item.HpPotion(10));
+            } else {
+                items.add(new component.item.RefineIron());
+            }
+        }
+
+        return items;
     }
 }

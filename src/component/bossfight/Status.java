@@ -1,13 +1,20 @@
 package component.bossfight;
 
+import component.inventory.Inventory;
+import component.inventory.Slot;
+import component.item.Item;
+import component.item.RefineIron;
+import component.item.equipment.Amulet;
+import component.item.equipment.Armor;
+import component.item.equipment.Weapon;
 import component.player.Player;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -16,6 +23,7 @@ import subscene.MarketSubScene;
 import view.GameViewManager;
 import view.ViewManager;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -117,6 +125,44 @@ public class Status {
         AudioClip winSound = new AudioClip(ClassLoader.getSystemResource("sound/win.mp3").toString());
         winSound.play();
         AnchorPane a = new AnchorPane(canvas);
+        HBox ItemList = new HBox();
+        ItemList.setPrefSize(600,75);
+        ItemList.setLayoutX(100);
+        ItemList.setLayoutY(400);
+        ItemList.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,255, 0.5),null,null)));
+        ItemList.setSpacing(10);
+        ItemList.setAlignment(Pos.CENTER);
+
+        ArrayList<Item> items = UnitUtils.generateReward();
+
+        for (Item item: items) {
+            Slot s = new Slot(item);
+            HBox.setMargin(s, new Insets(12.5));
+            s.setPrefWidth(50);
+            s.setPrefHeight(50);
+            s.setText("");
+            s.getItem().getImageView().setFitWidth(50);
+            s.getItem().getImageView().setFitHeight(50);
+            s.setOnMouseClicked(null);
+            ItemList.getChildren().add(s);
+        }
+
+        for (Item item: items) {
+            if (item instanceof RefineIron) {
+                Inventory.getInstance().getSlots().add(new Slot(new RefineIron()));
+            } else if (item instanceof Armor) {
+                Inventory.getInstance().getSlots().add(new Slot(new Armor()));
+            } else if (item instanceof Amulet) {
+                Inventory.getInstance().getSlots().add(new Slot(new Amulet()));
+            } else if (item instanceof Weapon) {
+                Inventory.getInstance().getSlots().add(new Slot(new Weapon()));
+            } else {
+                Inventory.getInstance().getSlots().add(new Slot(new component.item.HpPotion(10)));
+            }
+        }
+        Inventory.getInstance().updateInventory();
+
+        a.getChildren().add(ItemList);
         Button backButton = new Button("back");
         backButton.setPrefSize(200,20);
         backButton.setFont(new Font(20));

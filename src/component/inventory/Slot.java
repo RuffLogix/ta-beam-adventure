@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 public class Slot extends Pane {
     private Item item;
     private ImageView imageView;
+    Label text;
     public Slot(Item item) {
         imageView = item.getImageView();
         imageView.setFitWidth(25);
@@ -43,7 +44,7 @@ public class Slot extends Pane {
     }
 
     private void addText() {
-        Label text = new Label("x1");
+        text = new Label("x1");
         text.setLayoutX(15);
         text.setLayoutY(15);
         text.setTextFill(Color.WHITE);
@@ -52,5 +53,9 @@ public class Slot extends Pane {
 
     public Item getItem() {
         return item;
+    }
+
+    public void setText(String s) {
+        text.setText(s);
     }
 }
