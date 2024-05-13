@@ -32,7 +32,7 @@ public class UnitUtils {
             if (player == Outcome.SCISSORS && computer == Outcome.PAPER) return 1;
             return -1;
     }
-    public static Image outcomeToImage(Outcome outcome){
+    public static Image convertOutcomeToImage(Outcome outcome){
         Image image;
         if(outcome.equals(Outcome.ROCK)){
             image = new Image(ClassLoader.getSystemResource("r.png").toString());

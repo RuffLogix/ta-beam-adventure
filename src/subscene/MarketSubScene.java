@@ -59,7 +59,7 @@ public class MarketSubScene extends SubScene {
                     if (Math.random() < 0.2) ((Equipment) item).upgrade(false);
                     if (Math.random() < 0.1) ((Equipment) item).upgrade(false);
                 }
-                marketItems.add(new MarketItem(item, "This is an item", (int) (Math.random() * 25)));
+                marketItems.add(new MarketItem(item, "This is an item", (int) (Math.random() * 10)));
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }

@@ -28,10 +28,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Status {
-    private BossFight bossFight;
-    public Status(BossFight bossFight){
-        this.bossFight = bossFight;
-    }
     public static void drawResultImg(Canvas canvas){
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0,0,220,170);
@@ -41,8 +37,8 @@ public class Status {
         gc.setStroke(Color.WHITE);
         gc.strokeRoundRect(10, 10, 200, 130,20,20);
         gc.fillRoundRect(10, 10, 200, 130,20,20);
-        gc.drawImage(UnitUtils.outcomeToImage(BossFight.myChoice),10,15);
-        gc.drawImage(UnitUtils.outcomeToImage(BossPane.boss.getChoice()),140,15);
+        gc.drawImage(UnitUtils.convertOutcomeToImage(BossFight.myChoice),10,15);
+        gc.drawImage(UnitUtils.convertOutcomeToImage(BossPane.boss.getChoice()),140,15);
         gc.setFont(new Font(30));
         gc.setFill(Color.rgb(88,57,39));
         gc.fillText("VS", 95,65);
