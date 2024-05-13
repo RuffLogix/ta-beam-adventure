@@ -175,6 +175,7 @@ class component.bossfight.Status {
 class utils.DayNightLight {
 - FadeTransition toNightTransition
 - FadeTransition toDayTransition
++ boolean isDay
 + void toNight()
 + void toDay()
 }
