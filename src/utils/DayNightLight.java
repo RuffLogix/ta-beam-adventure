@@ -11,7 +11,9 @@ import view.ViewManager;
 public class DayNightLight extends Pane {
     private FadeTransition toNightTransition;
     private FadeTransition toDayTransition;
+    private boolean isDay;
     public DayNightLight() {
+            isDay = false;
             setPrefSize(ViewManager.WINDOW_WIDTH*20, ViewManager.WINDOW_HEIGHT*20);
             setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 50, 0.55), null, null)));
 
@@ -29,10 +31,16 @@ public class DayNightLight extends Pane {
     }
 
     public void toNight() {
-        toNightTransition.play();
+        if(isDay){
+            toNightTransition.play();
+            isDay = false;
+        }
     }
 
     public void toDay() {
-        toDayTransition.play();
+        if(!isDay){
+            toDayTransition.play();
+            isDay = true;
+        }
     }
 }
