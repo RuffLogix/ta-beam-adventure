@@ -25,6 +25,7 @@ public class BossFight extends StackPane {
   private BossFight(){
       createMainStage();
   }
+
     public static BossFight getInstance() {
       instance = new BossFight();
       return instance;
