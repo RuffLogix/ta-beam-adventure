@@ -1,24 +1,11 @@
 @startuml
 class subscene.MarketSubScene {
 - {static} ArrayList<MarketItem> marketItems
-- {static} ArrayList<Item> items
 - {static} AnchorPane root
 + {static} Label notEnoughCoin
-+ <<Create>> MarketSubScene()
-- void createItemList()
+- {static} Item createItem()
 + {static} void createMarketItems()
 + void toggle()
-}
-class component.bossFight.Status {
-- BossFight bossFight
-+ <<Create>> Status(BossFight)
-+ {static} void drawResultImg(Canvas)
-+ {static} void showMsg(Canvas)
-+ {static} void drawStatusBox(Canvas)
-+ {static} void drawStatusMsg(Canvas)
-+ {static} void drawBossConquered(BossFight)
-+ {static} void drawGameOver(BossFight)
-+ {static} void drawLastResultMsg(Label)
 }
 abstract class component.unit.BasedUnit {
 # Point2D position
@@ -28,31 +15,50 @@ abstract class component.unit.BasedUnit {
 # String imagePath
 # double speed
 # int coin
-+ <<Create>> BasedUnit()
-+ <<Create>> BasedUnit(String)
 - void initialUnit(String)
 + {abstract}void setPosition(Point2D)
 + void randomDestination()
 }
+class component.bossfight.ChickenBoss {
++ void shoot()
+}
 class component.item.equipment.Amulet {
 - WritableImage writableImage
 - double probability
-+ <<Create>> Amulet()
 + void upgrade(boolean)
 + double getProbability()
 }
 interface component.item.IUsable {
 ~ void use()
 }
-class component.item.equipment.Equipment {
+class component.bossfight.AttackButton {
+- Boss attackedBoss
+- BossFight bossFight
++ UnitUtils.Result myResult
+- AudioClip explosionSound
++ Button Btn(Image,UnitUtils.Outcome)
+}
+abstract class component.item.equipment.Equipment {
 # int durability
 # EquipmentUtils.TIER tier
-+ <<Create>> Equipment(String,Image)
 + void use()
 + int getDurability()
 + void decreaseDurability()
 + void upgrade(boolean)
 + EquipmentUtils.TIER getTier()
+}
+abstract class component.bossfight.Boss {
+- int hp
+- ImageView imageView
+- UnitUtils.Outcome choice
++ {static} int max_hp
++ void setChoice(UnitUtils.Outcome)
++ int getHp()
++ void setHp(int)
++ ImageView getImageView()
++ void setImageView(ImageView)
++ UnitUtils.Outcome getChoice()
++ {abstract}void shoot()
 }
 class view.ViewManager {
 + {static} int WINDOW_WIDTH
@@ -63,7 +69,6 @@ class view.ViewManager {
 - Button startButton
 - Button exitButton
 - {static} ViewManager instance
-- <<Create>> ViewManager()
 + {static} ViewManager getInstance()
 - void createMainStage()
 + Stage getMainStage()
@@ -91,33 +96,26 @@ enum utils.TIER {
 +  Orichalcum
 +  Excalibur
 }
-class component.bossFight.MyButtonSkin {
-+ <<Create>> MyButtonSkin(Button)
+class component.bossfight.BossFight {
+- BossPane bossPane
+- {static} BossFight instance
+- {static} Stage mainStage
++ {static} Pane mainPane
++ {static} Canvas statusBox
++ {static} Label lastResultMsg
++ {static} Canvas resultImg
++ {static} UnitUtils.Outcome myChoice
++ {static} BossFight getInstance()
+- void createMainStage()
++ {static} Stage getMainStage()
 }
 class component.item.equipment.Weapon {
 - WritableImage writableImage
 - int damage
-+ <<Create>> Weapon()
 + int getDamage()
 + void upgrade(boolean)
 }
-class component.bossFight.UnitUtils {
-+ {static} Outcome generateOutcome(double,double,double)
-+ {static} int evaluate(Outcome,Outcome)
-+ {static} Image outcomeToImage(Outcome)
-}
-enum component.bossFight.Outcome {
-+  ROCK
-+  PAPER
-+  SCISSORS
-}
-enum component.bossFight.Result {
-+  WIN
-+  LOSS
-+  DRAW
-}
 class component.unit.Slime {
-+ <<Create>> Slime()
 - void initialSlime()
 - void render()
 + ImageView getImageView()
@@ -127,17 +125,13 @@ class component.unit.Slime {
 class component.inventory.Slot {
 - Item item
 - ImageView imageView
-+ <<Create>> Slot(Item)
+~ Label text
 - void addEventListeners()
 - void addText()
 + Item getItem()
++ void setText(String)
 }
-class component.bossFight.PigBoss {
-+ <<Create>> PigBoss()
-+ void shoot()
-}
-class component.bossFight.RabbitBoss {
-+ <<Create>> RabbitBoss()
+class component.bossfight.RabbitBoss {
 + void shoot()
 }
 class utils.TileRenderer {
@@ -150,65 +144,43 @@ class application.Main {
 + {static} void main(String[])
 + void start(Stage)
 }
-class component.bossFight.BossPane {
-+ {static} Text bossHpText
-+ {static} Boss boss
-+ {static} AttackButton atk
-+ <<Create>> BossPane(Boss,BossFight)
-}
 class component.inventory.Inventory {
 - {static} Inventory instance
 - {static} ArrayList<Slot> slots
 - {static} int INVENTORY_SIZE
-- {static} AnimationTimer timer
-- <<Create>> Inventory()
 + {static} Inventory getInstance()
 - void initialInventory()
 + void updateInventory()
 + ArrayList<Slot> getSlots()
 + void reset()
 }
-abstract class component.bossFight.Boss {
-- int hp
-- ImageView imageView
-- int power
-- int level
-- UnitUtils.Outcome choice
-+ {static} int MAX_HP
-+ <<Create>> Boss()
-+ int getPower()
-+ void setPower(int)
-+ int getLevel()
-+ void setLevel(int)
-+ void setChoice(UnitUtils.Outcome)
-+ int getHp()
-+ void setHp(int)
-+ ImageView getImageView()
-+ void setImageView(ImageView)
-+ UnitUtils.Outcome getChoice()
-+ {abstract}void shoot()
-}
-class component.bossFight.SheepBoss {
-+ <<Create>> SheepBoss()
-+ void shoot()
-}
-class component.bossFight.TestBossFight {
-+ {static} void main(String[])
-+ void start(Stage)
-}
 class component.item.equipment.Armor {
 - WritableImage writableImage
 - int defense
-+ <<Create>> Armor()
 + int getDefense()
 + void upgrade(boolean)
+}
+class component.bossfight.SheepBoss {
++ void shoot()
+}
+class component.bossfight.Status {
++ {static} void drawResultImg(Canvas)
++ {static} void showMsg(Canvas)
++ {static} void drawStatusBox(Canvas)
++ {static} void drawStatusMsg(Canvas)
++ {static} void drawBossConquered(BossFight)
++ {static} void drawGameOver(BossFight)
++ {static} void drawLastResultMsg(Label)
 }
 class utils.DayNightLight {
 - FadeTransition toNightTransition
 - FadeTransition toDayTransition
-+ <<Create>> DayNightLight()
 + void toNight()
 + void toDay()
+}
+class component.bossfight.TestBossFight {
++ {static} void main(String[])
++ void start(Stage)
 }
 class subscene.InventorySubScene {
 - Label coinLabel
@@ -221,17 +193,12 @@ class subscene.InventorySubScene {
 - {static} int WIDTH
 - {static} int HEIGHT
 - {static} InventorySubScene instance
-+ <<Create>> InventorySubScene()
 + {static} InventorySubScene getInstance()
 - void setupStats(AnchorPane)
 + void updateStats()
 - void setupItemSlots(AnchorPane)
 - void setupEquipment(AnchorPane)
 - Label createStyledLabel(String)
-}
-class component.bossFight.ChickenBoss {
-+ <<Create>> ChickenBoss()
-+ void shoot()
 }
 class view.GameViewManager {
 - AnchorPane gamePane
@@ -250,7 +217,6 @@ class view.GameViewManager {
 ~ DayNightLight dayNightLight
 - {static} GameViewManager instance
 - Text playerLevel
-- <<Create>> GameViewManager()
 + {static} GameViewManager getInstance()
 - void initialGameStage()
 - void createDayNightLight()
@@ -269,12 +235,16 @@ class view.GameViewManager {
 + Stage getGameStage()
 + void reset()
 }
+class component.bossfight.BossPane {
++ {static} Text bossHpText
++ {static} Boss boss
++ {static} AttackButton atk
+}
 class component.item.HpPotion {
 - int healAmount
 - {static} String IMAGE_PATH
 - {static} Image IMAGE
 - {static} WritableImage writableImage
-+ <<Create>> HpPotion(int)
 + void use()
 + void setHealAmount(int)
 }
@@ -303,7 +273,6 @@ class component.player.Player {
 - Amulet amulet
 - Weapon weapon
 - int damage
-- <<Create>> Player()
 + {static} Player getInstance()
 - void loadResource()
 - void initialPlayer()
@@ -328,24 +297,27 @@ class component.player.Player {
 + Armor getArmor()
 + Amulet getAmulet()
 + int getAtk()
-- int attack(Boss)
 + {static} UnitUtils.Result getResult(Boss,UnitUtils.Outcome)
-+ {static} void setHp(int)
 + void reset()
 }
-class component.bossFight.BossFight {
-- BossPane bosspane
-- {static} BossFight instance
-- {static} Stage mainStage
-+ {static} Pane mainPane
-+ {static} Canvas statusBox
-+ {static} Label lastResultMsg
-+ {static} Canvas resultImg
-+ {static} UnitUtils.Outcome myChoice
-- <<Create>> BossFight()
-+ {static} BossFight getInstance()
-- void createMainStage()
-+ {static} Stage getMainStage()
+class component.bossfight.PigBoss {
++ void shoot()
+}
+class component.bossfight.UnitUtils {
++ {static} Outcome generateOutcome(double,double,double)
++ {static} int evaluate(Outcome,Outcome)
++ {static} Image convertOutcomeToImage(Outcome)
++ {static} ArrayList<Item> generateReward()
+}
+enum component.bossfight.Outcome {
++  ROCK
++  PAPER
++  SCISSORS
+}
+enum component.bossfight.Result {
++  WIN
++  LOSS
++  DRAW
 }
 class component.item.MarketItem {
 - Item item
@@ -354,7 +326,6 @@ class component.item.MarketItem {
 - Text itemPrice
 - Button buyButton
 - HBox itemLayout
-+ <<Create>> MarketItem(Item,String,int)
 - void createUI(Item,String,int)
 - void setupEvents(int)
 - void buyItem(int)
@@ -368,50 +339,44 @@ abstract class component.item.Item {
 # Image image
 # ImageView imageView
 - boolean isDestroyed
-+ <<Create>> Item(String,Image)
 + ImageView getImageView()
 + Image getImage()
 + void setImage(Image)
 + void setDestroyed(boolean)
 + boolean isDestroyed()
 + String getName()
++ Object clone()
+}
+class component.bossfight.MyButtonSkin {
 }
 class component.item.RefineIron {
-+ <<Create>> RefineIron()
 + void use()
-}
-class component.bossFight.AttackButton {
-- Boss attackedBoss
-- BossFight boosfight
-+ UnitUtils.Result myResult
-- AudioClip explosionSound
-+ <<Create>> AttackButton(Boss,BossFight)
-+ Button Btn(Image,UnitUtils.Outcome)
 }
 
 
 javafx.scene.SubScene <|-- subscene.MarketSubScene
+component.bossfight.Boss <|-- component.bossfight.ChickenBoss
 component.item.equipment.Equipment <|-- component.item.equipment.Amulet
+component.bossfight.HBox <|-- component.bossfight.AttackButton
 component.item.equipment.Refinable <|.. component.item.equipment.Equipment
 component.item.Item <|-- component.item.equipment.Equipment
-javafx.scene.control.skin.ButtonSkin <|-- component.bossFight.MyButtonSkin
+javafx.scene.layout.StackPane <|-- component.bossfight.BossFight
 component.item.equipment.Equipment <|-- component.item.equipment.Weapon
 component.unit.BasedUnit <|-- component.unit.Slime
 javafx.scene.layout.Pane <|-- component.inventory.Slot
-component.bossFight.Boss <|-- component.bossFight.PigBoss
-component.bossFight.Boss <|-- component.bossFight.RabbitBoss
+component.bossfight.Boss <|-- component.bossfight.RabbitBoss
 javafx.application.Application <|-- application.Main
-component.bossFight.VBox <|-- component.bossFight.BossPane
 javafx.scene.layout.GridPane <|-- component.inventory.Inventory
-component.bossFight.Boss <|-- component.bossFight.SheepBoss
-javafx.application.Application <|-- component.bossFight.TestBossFight
 component.item.equipment.Equipment <|-- component.item.equipment.Armor
+component.bossfight.Boss <|-- component.bossfight.SheepBoss
 javafx.scene.layout.Pane <|-- utils.DayNightLight
+javafx.application.Application <|-- component.bossfight.TestBossFight
 javafx.scene.SubScene <|-- subscene.InventorySubScene
-component.bossFight.Boss <|-- component.bossFight.ChickenBoss
+component.bossfight.VBox <|-- component.bossfight.BossPane
 component.item.Item <|-- component.item.HpPotion
-javafx.scene.layout.StackPane <|-- component.bossFight.BossFight
+component.bossfight.Boss <|-- component.bossfight.PigBoss
 component.item.IUsable <|.. component.item.Item
+component.item.Cloneable <|.. component.item.Item
+javafx.scene.control.skin.ButtonSkin <|-- component.bossfight.MyButtonSkin
 component.item.Item <|-- component.item.RefineIron
-component.bossFight.HBox <|-- component.bossFight.AttackButton
 @enduml
