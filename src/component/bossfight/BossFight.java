@@ -55,6 +55,7 @@ public class BossFight extends StackPane {
         mainStage = new Stage();
         mainStage.setTitle("TA.Beam's Adventure");
         mainStage.setScene(scene);
+        mainStage.setResizable(false);
     }
     public static Stage getMainStage() {
         return mainStage;
