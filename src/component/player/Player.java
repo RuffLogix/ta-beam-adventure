@@ -55,7 +55,6 @@ public class Player {
 
     private void initialPlayer() {
         hp = MAX_HP;
-        coin = 0;
         playerSpeed = 5;
         position = new Point2D(ViewManager.WINDOW_WIDTH / 2.0, ViewManager.WINDOW_HEIGHT / 2.0);
         level = 1;
@@ -194,10 +193,6 @@ public class Player {
         return damage + (weapon == null ? 0 : weapon.getDamage());
     }
 
-    private int attack(Boss boss){
-        int calculatedDamage = 0;
-        return calculatedDamage;
-    }
     public static UnitUtils.Result getResult(Boss boss, UnitUtils.Outcome myChoice){
         UnitUtils.Result myResult;
         if(UnitUtils.evaluate(myChoice,boss.getChoice()) == 1){myResult = UnitUtils.Result.WIN;}
@@ -206,11 +201,6 @@ public class Player {
         }
         else{myResult = UnitUtils.Result.LOSS;}
         return myResult;
-    }
-
-    public static void setHp(int hp) {
-        if(hp > MAX_HP){hp = MAX_HP;}
-        Player.hp = Math.max(0,hp);
     }
 
     public void reset() {

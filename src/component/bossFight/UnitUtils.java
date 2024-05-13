@@ -1,14 +1,9 @@
-package component.bossFight;//import item.HpPotion;
-//import item.Item;
+package component.bossFight;
 
 import javafx.scene.image.Image;
 
 public class UnitUtils {
-//    public static ArrayList<Item> generateItemList(){
-//        ArrayList<Item> itemList = new ArrayList<Item>();
-//        itemList.add(new HpPotion(5));
-//        return itemList;
-//    }
+
     public enum Outcome{
         ROCK,
         PAPER,
@@ -27,14 +22,6 @@ public class UnitUtils {
         else{outcome = Outcome.SCISSORS;}
         return outcome;
     }
-//    public static ArrayList<Item> generateLootDrop(){
-//        ArrayList<Item> list = new ArrayList<Item>();
-//        return list;
-//    }
-//    public static ArrayList<Item> generateRareLootDrop(){
-//        ArrayList<Item> list = new ArrayList<Item>();
-//        return list;
-//    }
     public static int evaluate(Outcome player, Outcome computer){
             if (player == computer) return 0;
             if (player == Outcome.ROCK && computer == Outcome.SCISSORS) return 1;

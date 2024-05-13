@@ -6,31 +6,11 @@ import javafx.scene.image.ImageView;
 public abstract class Boss{
     private int hp;
     private ImageView imageView;
-    private int power;
-    private int level;
     private UnitUtils.Outcome choice;
     public static int MAX_HP;
     public Boss(){
         MAX_HP = Player.level*50;
         setHp(MAX_HP);
-        setPower(5);
-        setLevel(1);
-    }
-
-    public int getPower() {
-        return power;
-    }
-
-    public void setPower(int power) {
-        this.power = Math.max(0,power);
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = Math.max(1,level);
     }
 
     public void setChoice(UnitUtils.Outcome choice) {
