@@ -6,6 +6,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
 import view.GameViewManager;
 
@@ -38,12 +39,13 @@ public class Slime extends BasedUnit {
         imageView.setLayoutX(position.getX());
         imageView.setLayoutY(position.getY());
         imageView.setStyle("-fx-effect: dropshadow(three-pass-box, white, 10, 0, 0, 0);");
-
+        AudioClip stabSound = new AudioClip(ClassLoader.getSystemResource("sound/stab.mp3").toString());
         imageView.setOnMouseClicked(e -> {
             Player player = Player.getInstance();
             if (position.distance(Player.getInstance().getPosition().add(Player.getInstance().getPlayerImageView().getFitWidth()/2, Player.getInstance().getPlayerImageView().getFitHeight()/2)) < 100) {
                 player.setCoin(player.getCoin() + coin);
                 imageView.setVisible(false);
+                stabSound.play();
             }
         });
 

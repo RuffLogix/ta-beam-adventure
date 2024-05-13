@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import subscene.InventorySubScene;
@@ -183,9 +184,10 @@ public class GameViewManager {
         imageView.setOnMouseExited(e -> {
             imageView.setStyle("");
         });
-
+        AudioClip teleportSound = new AudioClip(ClassLoader.getSystemResource("sound/teleport.mp3").toString());
         imageView.setOnMouseClicked(e -> {
             try {
+                teleportSound.play();
                 gameStage.hide();
                 BossFight.getInstance();
                 BossFight.getMainStage().show();

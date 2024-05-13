@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -113,6 +114,8 @@ public class Status {
         gc.fillText("You've conquered the boss.",300,250);
         gc.fillText("Your rewards: ",340,300);
         gc.fillText("Level: +1  Coins: +"+Math.min(Player.level*5,100), 340,340);
+        AudioClip winSound = new AudioClip(ClassLoader.getSystemResource("sound/win.mp3").toString());
+        winSound.play();
         AnchorPane a = new AnchorPane(canvas);
         Button backButton = new Button("back");
         backButton.setPrefSize(200,20);
@@ -144,6 +147,8 @@ public class Status {
         gc.fillText("Game Over",280,250);
         gc.setFont(new Font(20));
         gc.fillText("You've defeated, try again next time.",280,300);
+        AudioClip lossSound = new AudioClip(ClassLoader.getSystemResource("sound/loss.mp3").toString());
+        lossSound.play();
         AnchorPane a = new AnchorPane(canvas);
         Button backButton = new Button("exit");
         backButton.setPrefSize(200,20);
