@@ -62,7 +62,7 @@ class component.bossfight.AttackButton {
 - Boss attackedBoss
 - BossFight bossFight
 + UnitUtils.Result myResult
-- AudioClip explosionSound
+- MediaPlayer explosionSound
 + Button Btn(Image,UnitUtils.Outcome)
 }
 
