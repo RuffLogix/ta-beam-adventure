@@ -3,7 +3,7 @@ package component.item;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public abstract class Item implements IUsable, Cloneable {
+public abstract class Item implements Cloneable {
     protected String name;
     protected Image image;
     protected ImageView imageView;
@@ -39,6 +39,7 @@ public abstract class Item implements IUsable, Cloneable {
     public String getName() {
         return name;
     }
+    public abstract void use();
 
     @Override
     public Object clone() throws CloneNotSupportedException {

@@ -9,10 +9,6 @@ class component.item.HpPotion {
 }
 
 
-interface component.item.IUsable {
-~ void use()
-}
-
 abstract class component.item.Item {
 # String name
 # Image image
@@ -24,6 +20,7 @@ abstract class component.item.Item {
 + void setDestroyed(boolean)
 + boolean isDestroyed()
 + String getName()
++ {abstract}void use()
 + Object clone()
 }
 
@@ -101,7 +98,6 @@ class component.item.RefineIron {
 
 
 component.item.Item <|-- component.item.HpPotion
-component.item.IUsable <|.. component.item.Item
 component.item.Cloneable <|.. component.item.Item
 component.item.equipment.Equipment <|-- component.item.equipment.Weapon
 component.item.equipment.Equipment <|-- component.item.equipment.Amulet

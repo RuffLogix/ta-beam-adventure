@@ -1,12 +1,10 @@
 package component.inventory;
 
-import component.item.IUsable;
 import component.item.Item;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
 public class Slot extends Pane {
     private Item item;
