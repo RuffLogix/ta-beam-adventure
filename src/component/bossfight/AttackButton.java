@@ -7,7 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -16,7 +17,7 @@ public class AttackButton extends HBox {
     private Boss attackedBoss;
     private BossFight bossFight;
     public  UnitUtils.Result myResult;
-    private AudioClip explosionSound;
+    private MediaPlayer explosionSound;
     public AttackButton(Boss boss, BossFight bossFight){
         attackedBoss = boss;
         this.bossFight = bossFight;
@@ -24,7 +25,8 @@ public class AttackButton extends HBox {
         Image r = new Image(ClassLoader.getSystemResource("rock.jpg").toString());
         Image p = new Image(ClassLoader.getSystemResource("paper.jpg").toString());
         Image s = new Image(ClassLoader.getSystemResource("scissors.jpg").toString());
-        explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
+        Media sound = new Media(ClassLoader.getSystemResource("Explosion.wav").toString());
+        explosionSound = new MediaPlayer(sound);
         Button scissors = Btn(s, UnitUtils.Outcome.SCISSORS);
         Button rock = Btn(r, UnitUtils.Outcome.ROCK);
         Button paper = Btn(p, UnitUtils.Outcome.PAPER);

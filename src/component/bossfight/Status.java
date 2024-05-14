@@ -15,7 +15,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -125,7 +126,8 @@ public class Status {
         gc.fillText("Level: +1  Coins: +"+Math.min(Player.level*5,100), 340,340);
 
         // Play the win sound
-        AudioClip winSound = new AudioClip(ClassLoader.getSystemResource("sound/win.mp3").toString());
+        Media sound = new Media(ClassLoader.getSystemResource("sound/win.mp3").toString());
+        MediaPlayer winSound = new MediaPlayer(sound);
         winSound.play();
 
         // Create a item drop list
@@ -202,7 +204,8 @@ public class Status {
         gc.fillText("You've defeated, try again next time.",280,300);
 
         // Play the loss sound
-        AudioClip lossSound = new AudioClip(ClassLoader.getSystemResource("sound/loss.mp3").toString());
+        Media sound = new Media(ClassLoader.getSystemResource("sound/loss.mp3").toString());
+        MediaPlayer lossSound = new MediaPlayer(sound);
         lossSound.play();
 
         AnchorPane a = new AnchorPane(canvas);
