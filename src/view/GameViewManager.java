@@ -178,7 +178,6 @@ public class GameViewManager {
 
         Media sound = new Media(ClassLoader.getSystemResource("sound/teleport.mp3").toString());
         MediaPlayer teleportSound = new MediaPlayer(sound);
-        teleportSound.setCycleCount(-1);
         imageView.setOnMouseClicked(e -> {
             try {
                 teleportSound.play();

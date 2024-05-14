@@ -27,6 +27,7 @@ public class AttackButton extends HBox {
         Image s = new Image(ClassLoader.getSystemResource("scissors.jpg").toString());
         Media sound = new Media(ClassLoader.getSystemResource("Explosion.wav").toString());
         explosionSound = new MediaPlayer(sound);
+        explosionSound.setCycleCount(1);
         Button scissors = Btn(s, UnitUtils.Outcome.SCISSORS);
         Button rock = Btn(r, UnitUtils.Outcome.ROCK);
         Button paper = Btn(p, UnitUtils.Outcome.PAPER);
