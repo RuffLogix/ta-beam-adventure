@@ -1,0 +1,53 @@
+@startuml
+class component.player.Player {
+- Point2D position
+- Image playerImage
+- ImageView playerImageView
+- String playerResourcePath
+- int horizontalDirection
+- int verticalDirection
+- WritableImage[] walkUp
+- WritableImage[] walkDown
+- WritableImage[] walkLeft
+- WritableImage[] walkRight
+- int direction
+- int playerSpeed
+- int coin
+- {static} Player instance
++ {static} int MAX_HP
++ {static} int level
+- {static} int hp
+- Armor armor
+- Amulet amulet
+- Weapon weapon
+- int damage
++ {static} Player getInstance()
+- void loadResource()
+- void initialPlayer()
+- void render()
++ void update()
++ void playerAnimation(int)
++ ImageView getPlayerImageView()
++ void setHorizontalDirection(int)
++ void setVerticalDirection(int)
++ void setCoin(int)
++ int getCoin()
++ Point2D getPosition()
++ {static} int getHp()
++ void heal(int)
++ void takeDamage(int)
++ void useWeapon()
++ void useAmulet()
++ void setWeapon(Weapon)
++ void setArmor(Armor)
++ void setAmulet(Amulet)
++ Weapon getWeapon()
++ Armor getArmor()
++ Amulet getAmulet()
++ int getAtk()
++ {static} UnitUtils.Result getResult(Boss,UnitUtils.Outcome)
++ void reset()
+}
+
+
+@enduml

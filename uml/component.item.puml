@@ -1,0 +1,112 @@
+@startuml
+class component.item.HpPotion {
+- int healAmount
+- {static} String IMAGE_PATH
+- {static} Image IMAGE
+- {static} WritableImage writableImage
++ void use()
++ void setHealAmount(int)
+}
+
+
+interface component.item.IUsable {
+~ void use()
+}
+
+abstract class component.item.Item {
+# String name
+# Image image
+# ImageView imageView
+- boolean isDestroyed
++ ImageView getImageView()
++ Image getImage()
++ void setImage(Image)
++ void setDestroyed(boolean)
++ boolean isDestroyed()
++ String getName()
++ Object clone()
+}
+
+
+class component.item.equipment.Weapon {
+- WritableImage writableImage
+- int damage
++ int getDamage()
++ void upgrade(boolean)
++ void use()
++ int getDurability()
++ void decreaseDurability()
++ EquipmentUtils.TIER getTier()
+}
+
+
+class component.item.equipment.Amulet {
+- WritableImage writableImage
+- double probability
++ void upgrade(boolean)
++ void use()
++ double getProbability()
++ int getDurability()
++ void decreaseDurability()
++ EquipmentUtils.TIER getTier()
+}
+
+
+abstract class component.item.equipment.Equipment {
+# int durability
+# EquipmentUtils.TIER tier
++ {abstract}int getDurability()
++ {abstract}void decreaseDurability()
++ {abstract}EquipmentUtils.TIER getTier()
+}
+
+
+interface component.item.equipment.Refinable {
+~ void upgrade(boolean)
+}
+
+class component.item.MarketItem {
+- Item item
+- Text itemName
+- Text itemDescription
+- Text itemPrice
+- Button buyButton
+- HBox itemLayout
+- void createUI(Item,String,int)
+- void setupEvents(int)
+- void buyItem(int)
++ HBox getItemLayout()
++ Text getItemName()
++ Text getItemDescription()
++ Text getItemPrice()
+}
+
+
+class component.item.equipment.Armor {
+- WritableImage writableImage
+- int defense
++ int getDefense()
++ void upgrade(boolean)
++ void use()
++ int getDurability()
++ void decreaseDurability()
++ EquipmentUtils.TIER getTier()
+}
+
+
+class component.item.RefineIron {
++ void use()
+}
+
+
+
+component.item.Item <|-- component.item.HpPotion
+component.item.IUsable <|.. component.item.Item
+component.item.Cloneable <|.. component.item.Item
+component.item.equipment.Equipment <|-- component.item.equipment.Weapon
+component.item.equipment.Equipment <|-- component.item.equipment.Amulet
+component.item.equipment.Refinable <|.. component.item.equipment.Equipment
+component.item.Item <|-- component.item.equipment.Equipment
+component.item.equipment.Equipment <|-- component.item.equipment.Armor
+component.item.Item <|-- component.item.RefineIron
+@enduml

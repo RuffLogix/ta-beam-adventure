@@ -1,0 +1,27 @@
+@startuml
+class component.unit.Slime {
+- void initialSlime()
+- void render()
++ ImageView getImageView()
++ void setPosition(Point2D)
++ void walk()
+}
+
+abstract class component.unit.BasedUnit {
+# Point2D position
+# Image image
+# ImageView imageView
+# Point2D destination
+# String imagePath
+# double speed
+# int coin
+- void initialUnit(String)
++ {abstract}void setPosition(Point2D)
++ void randomDestination()
+}
+
+
+
+
+component.unit.BasedUnit <|-- component.unit.Slime
+@enduml

@@ -1,0 +1,110 @@
+@startuml
+class component.bossfight.RabbitBoss {
++ void shoot()
+}
+
+class component.bossfight.MyButtonSkin {
+}
+class component.bossfight.BossFight {
+- BossPane bossPane
+- {static} BossFight instance
+- {static} Stage mainStage
++ {static} Pane mainPane
++ {static} Canvas statusBox
++ {static} Label lastResultMsg
++ {static} Canvas resultImg
++ {static} UnitUtils.Outcome myChoice
++ {static} BossFight getInstance()
+- void createMainStage()
++ {static} Stage getMainStage()
+}
+
+
+class component.bossfight.Status {
++ {static} void drawResultImg(Canvas)
++ {static} void showMsg(Canvas)
++ {static} void drawStatusBox(Canvas)
++ {static} void drawStatusMsg(Canvas)
++ {static} void drawBossConquered(BossFight)
++ {static} void drawGameOver(BossFight)
++ {static} void drawLastResultMsg(Label)
+}
+
+class component.bossfight.UnitUtils {
++ {static} Outcome generateOutcome(double,double,double)
++ {static} int evaluate(Outcome,Outcome)
++ {static} Image convertOutcomeToImage(Outcome)
++ {static} ArrayList<Item> generateReward()
+}
+
+enum component.bossfight.Outcome {
++  ROCK
++  PAPER
++  SCISSORS
+}
+
+enum component.bossfight.Result {
++  WIN
++  LOSS
++  DRAW
+}
+
+class component.bossfight.SheepBoss {
++ void shoot()
+}
+
+class component.bossfight.TestBossFight {
++ {static} void main(String[])
++ void start(Stage)
+}
+
+class component.bossfight.AttackButton {
+- Boss attackedBoss
+- BossFight bossFight
++ UnitUtils.Result myResult
+- AudioClip explosionSound
++ Button Btn(Image,UnitUtils.Outcome)
+}
+
+
+abstract class component.bossfight.Boss {
+- int hp
+- ImageView imageView
+- UnitUtils.Outcome choice
++ {static} int max_hp
++ void setChoice(UnitUtils.Outcome)
++ int getHp()
++ void setHp(int)
++ ImageView getImageView()
++ void setImageView(ImageView)
++ UnitUtils.Outcome getChoice()
++ {abstract}void shoot()
+}
+
+
+class component.bossfight.ChickenBoss {
++ void shoot()
+}
+
+class component.bossfight.PigBoss {
++ void shoot()
+}
+
+class component.bossfight.BossPane {
++ {static} Text bossHpText
++ {static} Boss boss
++ {static} AttackButton atk
+}
+
+
+
+component.bossfight.Boss <|-- component.bossfight.RabbitBoss
+javafx.scene.control.skin.ButtonSkin <|-- component.bossfight.MyButtonSkin
+javafx.scene.layout.StackPane <|-- component.bossfight.BossFight
+component.bossfight.Boss <|-- component.bossfight.SheepBoss
+javafx.application.Application <|-- component.bossfight.TestBossFight
+component.bossfight.HBox <|-- component.bossfight.AttackButton
+component.bossfight.Boss <|-- component.bossfight.ChickenBoss
+component.bossfight.Boss <|-- component.bossfight.PigBoss
+component.bossfight.VBox <|-- component.bossfight.BossPane
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+class component.inventory.Inventory {
+- {static} Inventory instance
+- {static} ArrayList<Slot> slots
+- {static} int INVENTORY_SIZE
++ {static} Inventory getInstance()
+- void initialInventory()
++ void updateInventory()
++ ArrayList<Slot> getSlots()
++ void reset()
+}
+
+
+class component.inventory.Slot {
+- Item item
+- ImageView imageView
+~ Label text
+- void addEventListeners()
+- void addText()
++ Item getItem()
++ void setText(String)
+}
+
+
+
+
+javafx.scene.layout.GridPane <|-- component.inventory.Inventory
+javafx.scene.layout.Pane <|-- component.inventory.Slot
+@enduml
