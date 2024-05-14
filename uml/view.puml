@@ -1,0 +1,55 @@
+@startuml
+class view.GameViewManager {
+- AnchorPane gamePane
+- Scene gameScene
+- Stage gameStage
+- AnimationTimer gameTimer
+- Stage mainStage
+- MarketSubScene marketSubScene
+- InventorySubScene inventorySubScene
++ {static} int TILE_SIZE
+- Player player
+- ArrayList<Slime> slimes
+~ DayNightLight dayNightLight
+- {static} GameViewManager instance
+- Text playerLevel
+- <<Create>> GameViewManager()
++ {static} GameViewManager getInstance()
+- void initialGameStage()
+- void createDayNightLight()
++ void renderSlime(int)
+- void renderTile()
+- void createListeners()
+- void createGameStage()
+- void createSubScenes()
++ void createNewGame(Stage)
+- void createTeleport()
+- void createGameLoop()
+- void updateSlime()
+- void updateCamera()
++ {static} boolean isOutsideGame(Point2D)
++ Stage getGameStage()
++ void reset()
+}
+
+
+class view.ViewManager {
++ {static} int WINDOW_WIDTH
++ {static} int WINDOW_HEIGHT
+- AnchorPane mainPane
+- Stage mainStage
+- Scene mainScene
+- Button startButton
+- Button exitButton
+- {static} ViewManager instance
+- <<Create>> ViewManager()
++ {static} ViewManager getInstance()
+- void createMainStage()
++ Stage getMainStage()
+- void createButtons()
+- void createStartButton()
+- void createExitButton()
+}
+
+
+@enduml

@@ -1,0 +1,46 @@
+@startuml
+class utils.TileRenderer {
+- {static} String filePath
+- {static} Image tileSet
++ {static} int TILE_SIZE
++ {static} Image getTile(char)
+}
+
+
+class utils.DayNightLight {
+- FadeTransition toNightTransition
+- FadeTransition toDayTransition
+- boolean isDay
++ <<Create>> DayNightLight()
++ void toNight()
++ void toDay()
+}
+
+
+class utils.EquipmentUtils {
+- {static} String IMAGE_PATH
+- {static} Image IMAGE
+- {static} String IMAGE_PATH2
+- {static} Image IMAGE2
++ {static} Image getImage(Equipment)
++ {static} Image getRefineIronImage()
+}
+
+
+enum utils.TIER {
++  Bronze
++  Iron
++  Steel
++  Silver
++  Gold
++  Diamond
++  Mythril
++  Adamantium
++  Orichalcum
++  Excalibur
+}
+
+
+
+javafx.scene.layout.Pane <|-- utils.DayNightLight
+@enduml

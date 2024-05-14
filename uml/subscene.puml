@@ -1,0 +1,38 @@
+@startuml
+class subscene.MarketSubScene {
+- {static} ArrayList<MarketItem> marketItems
+- {static} AnchorPane root
++ {static} Label notEnoughCoin
++ <<Create>> MarketSubScene()
+- {static} Item createItem()
++ {static} void createMarketItems()
++ void toggle()
+}
+
+
+class subscene.InventorySubScene {
+- Label coinLabel
+- Label hpLabel
+- Label atkLabel
+- Label defLabel
+- Label armorLabel
+- Label weaponLabel
+- Label amuletLabel
+- {static} int WIDTH
+- {static} int HEIGHT
+- {static} InventorySubScene instance
++ <<Create>> InventorySubScene()
++ {static} InventorySubScene getInstance()
+- void setupStats(AnchorPane)
++ void updateStats()
+- void setupItemSlots(AnchorPane)
+- void setupEquipment(AnchorPane)
+- Label createStyledLabel(String)
+}
+
+
+
+
+javafx.scene.SubScene <|-- subscene.MarketSubScene
+javafx.scene.SubScene <|-- subscene.InventorySubScene
+@enduml

@@ -1,0 +1,342 @@
+@startuml
+abstract class component.unit.BasedUnit {
+# Point2D position
+# Image image
+# ImageView imageView
+# Point2D destination
+# String imagePath
+# double speed
+# int coin
++ <<Create>> BasedUnit()
++ <<Create>> BasedUnit(String)
+- void initialUnit(String)
++ {abstract}void setPosition(Point2D)
++ void randomDestination()
+}
+
+
+class component.bossfight.ChickenBoss {
++ <<Create>> ChickenBoss()
++ void shoot()
+}
+
+class component.item.equipment.Amulet {
+- WritableImage writableImage
+- double probability
++ <<Create>> Amulet()
++ void upgrade(boolean)
++ void use()
++ double getProbability()
++ int getDurability()
++ void decreaseDurability()
++ EquipmentUtils.TIER getTier()
+}
+
+
+interface component.item.IUsable {
+~ void use()
+}
+
+class component.bossfight.AttackButton {
+- Boss attackedBoss
+- BossFight bossFight
++ UnitUtils.Result myResult
+- AudioClip explosionSound
++ <<Create>> AttackButton(Boss,BossFight)
++ Button Btn(Image,UnitUtils.Outcome)
+}
+
+
+abstract class component.item.equipment.Equipment {
+# int durability
+# EquipmentUtils.TIER tier
++ <<Create>> Equipment(String,Image)
++ {abstract}int getDurability()
++ {abstract}void decreaseDurability()
++ {abstract}EquipmentUtils.TIER getTier()
+}
+
+
+abstract class component.bossfight.Boss {
+- int hp
+- ImageView imageView
+- UnitUtils.Outcome choice
++ {static} int max_hp
++ <<Create>> Boss()
++ void setChoice(UnitUtils.Outcome)
++ int getHp()
++ void setHp(int)
++ ImageView getImageView()
++ void setImageView(ImageView)
++ UnitUtils.Outcome getChoice()
++ {abstract}void shoot()
+}
+
+
+class component.bossfight.BossFight {
+- BossPane bossPane
+- {static} BossFight instance
+- {static} Stage mainStage
++ {static} Pane mainPane
++ {static} Canvas statusBox
++ {static} Label lastResultMsg
++ {static} Canvas resultImg
++ {static} UnitUtils.Outcome myChoice
+- <<Create>> BossFight()
++ {static} BossFight getInstance()
+- void createMainStage()
++ {static} Stage getMainStage()
+}
+
+
+class component.item.equipment.Weapon {
+- WritableImage writableImage
+- int damage
++ <<Create>> Weapon()
++ int getDamage()
++ void upgrade(boolean)
++ void use()
++ int getDurability()
++ void decreaseDurability()
++ EquipmentUtils.TIER getTier()
+}
+
+
+class component.unit.Slime {
++ <<Create>> Slime()
+- void initialSlime()
+- void render()
++ ImageView getImageView()
++ void setPosition(Point2D)
++ void walk()
+}
+
+class component.inventory.Slot {
+- Item item
+- ImageView imageView
+~ Label text
++ <<Create>> Slot(Item)
+- void addEventListeners()
+- void addText()
++ Item getItem()
++ void setText(String)
+}
+
+
+class component.bossfight.RabbitBoss {
++ <<Create>> RabbitBoss()
++ void shoot()
+}
+
+class component.inventory.Inventory {
+- {static} Inventory instance
+- {static} ArrayList<Slot> slots
+- {static} int INVENTORY_SIZE
+- <<Create>> Inventory()
++ {static} Inventory getInstance()
+- void initialInventory()
++ void updateInventory()
++ ArrayList<Slot> getSlots()
++ void reset()
+}
+
+
+class component.item.equipment.Armor {
+- WritableImage writableImage
+- int defense
++ <<Create>> Armor()
++ int getDefense()
++ void upgrade(boolean)
++ void use()
++ int getDurability()
++ void decreaseDurability()
++ EquipmentUtils.TIER getTier()
+}
+
+
+class component.bossfight.SheepBoss {
++ <<Create>> SheepBoss()
++ void shoot()
+}
+
+class component.bossfight.Status {
++ {static} void drawResultImg(Canvas)
++ {static} void showMsg(Canvas)
++ {static} void drawStatusBox(Canvas)
++ {static} void drawStatusMsg(Canvas)
++ {static} void drawBossConquered(BossFight)
++ {static} void drawGameOver(BossFight)
++ {static} void drawLastResultMsg(Label)
+}
+
+class component.bossfight.TestBossFight {
++ {static} void main(String[])
++ void start(Stage)
+}
+
+class component.bossfight.BossPane {
++ {static} Text bossHpText
++ {static} Boss boss
++ {static} AttackButton atk
++ <<Create>> BossPane(Boss,BossFight)
+}
+
+
+class component.item.HpPotion {
+- int healAmount
+- {static} String IMAGE_PATH
+- {static} Image IMAGE
+- {static} WritableImage writableImage
++ <<Create>> HpPotion(int)
++ void use()
++ void setHealAmount(int)
+}
+
+
+interface component.item.equipment.Refinable {
+~ void upgrade(boolean)
+}
+
+class component.player.Player {
+- Point2D position
+- Image playerImage
+- ImageView playerImageView
+- String playerResourcePath
+- int horizontalDirection
+- int verticalDirection
+- WritableImage[] walkUp
+- WritableImage[] walkDown
+- WritableImage[] walkLeft
+- WritableImage[] walkRight
+- int direction
+- int playerSpeed
+- int coin
+- {static} Player instance
++ {static} int MAX_HP
++ {static} int level
+- {static} int hp
+- Armor armor
+- Amulet amulet
+- Weapon weapon
+- int damage
+- <<Create>> Player()
++ {static} Player getInstance()
+- void loadResource()
+- void initialPlayer()
+- void render()
++ void update()
++ void playerAnimation(int)
++ ImageView getPlayerImageView()
++ void setHorizontalDirection(int)
++ void setVerticalDirection(int)
++ void setCoin(int)
++ int getCoin()
++ Point2D getPosition()
++ {static} int getHp()
++ void heal(int)
++ void takeDamage(int)
++ void useWeapon()
++ void useAmulet()
++ void setWeapon(Weapon)
++ void setArmor(Armor)
++ void setAmulet(Amulet)
++ Weapon getWeapon()
++ Armor getArmor()
++ Amulet getAmulet()
++ int getAtk()
++ {static} UnitUtils.Result getResult(Boss,UnitUtils.Outcome)
++ void reset()
+}
+
+
+class component.bossfight.PigBoss {
++ <<Create>> PigBoss()
++ void shoot()
+}
+
+class component.bossfight.UnitUtils {
++ {static} Outcome generateOutcome(double,double,double)
++ {static} int evaluate(Outcome,Outcome)
++ {static} Image convertOutcomeToImage(Outcome)
++ {static} ArrayList<Item> generateReward()
+}
+
+enum component.bossfight.Outcome {
++  ROCK
++  PAPER
++  SCISSORS
+}
+
+enum component.bossfight.Result {
++  WIN
++  LOSS
++  DRAW
+}
+
+class component.item.MarketItem {
+- Item item
+- Text itemName
+- Text itemDescription
+- Text itemPrice
+- Button buyButton
+- HBox itemLayout
++ <<Create>> MarketItem(Item,String,int)
+- void createUI(Item,String,int)
+- void setupEvents(int)
+- void buyItem(int)
++ HBox getItemLayout()
++ Text getItemName()
++ Text getItemDescription()
++ Text getItemPrice()
+}
+
+
+abstract class component.item.Item {
+# String name
+# Image image
+# ImageView imageView
+- boolean isDestroyed
++ <<Create>> Item(String,Image)
++ ImageView getImageView()
++ Image getImage()
++ void setImage(Image)
++ void setDestroyed(boolean)
++ boolean isDestroyed()
++ String getName()
++ Object clone()
+}
+
+
+class component.bossfight.MyButtonSkin {
++ <<Create>> MyButtonSkin(Button)
+}
+
+class component.item.RefineIron {
++ <<Create>> RefineIron()
++ void use()
+}
+
+
+
+component.bossfight.Boss <|-- component.bossfight.ChickenBoss
+component.item.equipment.Equipment <|-- component.item.equipment.Amulet
+component.bossfight.HBox <|-- component.bossfight.AttackButton
+component.item.equipment.Refinable <|.. component.item.equipment.Equipment
+component.item.Item <|-- component.item.equipment.Equipment
+javafx.scene.layout.StackPane <|-- component.bossfight.BossFight
+component.item.equipment.Equipment <|-- component.item.equipment.Weapon
+component.unit.BasedUnit <|-- component.unit.Slime
+javafx.scene.layout.Pane <|-- component.inventory.Slot
+component.bossfight.Boss <|-- component.bossfight.RabbitBoss
+javafx.scene.layout.GridPane <|-- component.inventory.Inventory
+component.item.equipment.Equipment <|-- component.item.equipment.Armor
+component.bossfight.Boss <|-- component.bossfight.SheepBoss
+javafx.application.Application <|-- component.bossfight.TestBossFight
+component.bossfight.VBox <|-- component.bossfight.BossPane
+component.item.Item <|-- component.item.HpPotion
+component.bossfight.Boss <|-- component.bossfight.PigBoss
+component.item.IUsable <|.. component.item.Item
+component.item.Cloneable <|.. component.item.Item
+javafx.scene.control.skin.ButtonSkin <|-- component.bossfight.MyButtonSkin
+component.item.Item <|-- component.item.RefineIron
+@enduml
