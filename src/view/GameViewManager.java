@@ -31,9 +31,6 @@ public class GameViewManager {
     private Stage mainStage;
     private MarketSubScene marketSubScene;
     private InventorySubScene inventorySubScene = InventorySubScene.getInstance();
-    private String stoneResourcePath;
-    private String grass1ResourcePath;
-    private String grass2ResourcePath;
     public final static int TILE_SIZE = 100;
     private Player player = Player.getInstance();
     private ArrayList<Slime> slimes;
@@ -58,7 +55,6 @@ public class GameViewManager {
         createGameStage();
         createGameLoop();
         createListeners();
-        loadResources();
         renderTile();
         createDayNightLight();
 
@@ -75,12 +71,6 @@ public class GameViewManager {
     private void createDayNightLight() {
         dayNightLight = new DayNightLight();
         gamePane.getChildren().add(dayNightLight);
-    }
-
-    private void loadResources() {
-        stoneResourcePath = ClassLoader.getSystemResource("material/stone.jpg").toString();
-        grass1ResourcePath = ClassLoader.getSystemResource("material/grass1.png").toString();
-        grass2ResourcePath = ClassLoader.getSystemResource("material/grass2.jpg").toString();
     }
 
     public void renderSlime(int n) {
