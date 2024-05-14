@@ -22,6 +22,7 @@ public class Main extends Application {
 
             primaryStage.show();
             bgSound.setCycleCount(MediaPlayer.INDEFINITE);
+            bgSound.setOnEndOfMedia(bgSound::play);
             bgSound.play();
         } catch (Exception e) {
             e.printStackTrace();
