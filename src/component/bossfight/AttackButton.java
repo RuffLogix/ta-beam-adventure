@@ -12,7 +12,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-
 public class AttackButton extends HBox {
     private Boss attackedBoss;
     private BossFight bossFight;
@@ -25,9 +24,6 @@ public class AttackButton extends HBox {
         Image r = new Image(ClassLoader.getSystemResource("rock.jpg").toString());
         Image p = new Image(ClassLoader.getSystemResource("paper.jpg").toString());
         Image s = new Image(ClassLoader.getSystemResource("scissors.jpg").toString());
-        Media sound = new Media(ClassLoader.getSystemResource("Explosion.wav").toString());
-        explosionSound = new MediaPlayer(sound);
-        explosionSound.setCycleCount(1);
         Button scissors = Btn(s, UnitUtils.Outcome.SCISSORS);
         Button rock = Btn(r, UnitUtils.Outcome.ROCK);
         Button paper = Btn(p, UnitUtils.Outcome.PAPER);
@@ -48,6 +44,8 @@ public class AttackButton extends HBox {
             @Override
             public void handle(MouseEvent event) {
                 BossFight.myChoice = myChoice;
+                Media sound = new Media(ClassLoader.getSystemResource("Explosion.wav").toString());
+                explosionSound = new MediaPlayer(sound);
                 // boss starts shooting
                 if (Player.getInstance().getAmulet()!=null && Player.getInstance().getAmulet().getProbability() > Math.random()) {
                     if (myChoice == UnitUtils.Outcome.ROCK) {
