@@ -177,9 +177,10 @@ public class GameViewManager {
         });
 
         Media sound = new Media(ClassLoader.getSystemResource("sound/teleport.mp3").toString());
-        MediaPlayer teleportSound = new MediaPlayer(sound);
+
         imageView.setOnMouseClicked(e -> {
             try {
+                MediaPlayer teleportSound = new MediaPlayer(sound);
                 teleportSound.play();
                 gameStage.hide();
                 BossFight.getInstance();
