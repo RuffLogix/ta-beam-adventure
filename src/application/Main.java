@@ -21,7 +21,7 @@ public class Main extends Application {
             primaryStage = viewManager.getMainStage();
 
             primaryStage.show();
-            bgSound.setCycleCount(AudioClip.INDEFINITE);
+            bgSound.setCycleCount(MediaPlayer.INDEFINITE);
             bgSound.play();
         } catch (Exception e) {
             e.printStackTrace();
