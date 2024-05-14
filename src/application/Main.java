@@ -2,6 +2,8 @@ package application;
 
 import javafx.application.Application;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import view.ViewManager;
 
@@ -13,9 +15,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            AudioClip  bgSound = new AudioClip(ClassLoader.getSystemResource("sound/background.mp3").toString());
             ViewManager viewManager = ViewManager.getInstance();
-
+            Media media = new Media(ClassLoader.getSystemResource("sound/background.mp3").toString());
+            MediaPlayer  bgSound = new MediaPlayer(media);
             primaryStage = viewManager.getMainStage();
 
             primaryStage.show();
