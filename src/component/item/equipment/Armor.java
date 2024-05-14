@@ -24,8 +24,10 @@ public class Armor extends Equipment {
 
     @Override
     public void upgrade(boolean useIron) {
+        // if the armor is already gold, return
         if (tier==EquipmentUtils.TIER.Gold) return ;
 
+        // if the player needs to use iron to upgrade the armor, check if the player has iron
         if (useIron) {
             boolean found = false;
             for (Slot slot : Inventory.getInstance().getSlots()) {
@@ -38,11 +40,13 @@ public class Armor extends Equipment {
             if (!found) return;
         }
 
+        // upgrade the armor
         name = name + "+";
         tier = tier == EquipmentUtils.TIER.Bronze ? EquipmentUtils.TIER.Silver : tier == EquipmentUtils.TIER.Silver ? tier = EquipmentUtils.TIER.Gold : tier;
         image = EquipmentUtils.getImage(this);
         imageView = new ImageView(EquipmentUtils.getImage(this));
 
+        // update the inventory
         Inventory.getInstance().updateInventory();
 
         defense += 10;
@@ -52,6 +56,7 @@ public class Armor extends Equipment {
     }
 
     public void use() {
+        // if player already has an armor, put the current armor back to inventory
         if (Player.getInstance().getArmor() != null) {
             Armor armor = Player.getInstance().getArmor();
             armor.setDestroyed(false);

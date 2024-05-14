@@ -26,19 +26,22 @@ public class Slime extends BasedUnit {
     private void render() {
         image = new Image(imagePath);
 
+        // Choose until the position is slime
         int i=0, j=0;
         while ((i==0 && j==0) || (j==0 && i==1) || (j==0 && i==3)) {
             i = (int) (Math.random() * 6);
             j = (int) (Math.random() * 4);
         }
 
+        // Read slime image
         imageView = new ImageView(new WritableImage(image.getPixelReader(), 30 + i*118, 63 + j*180, 84, 73));
-
         imageView.setFitWidth(GameViewManager.TILE_SIZE / 3.0);
         imageView.setFitHeight(GameViewManager.TILE_SIZE / 3.0 * 0.8);
         imageView.setLayoutX(position.getX());
         imageView.setLayoutY(position.getY());
         imageView.setStyle("-fx-effect: dropshadow(three-pass-box, white, 10, 0, 0, 0);");
+
+        // Create sound effect
         AudioClip stabSound = new AudioClip(ClassLoader.getSystemResource("sound/stab.mp3").toString());
         imageView.setOnMouseClicked(e -> {
             Player player = Player.getInstance();
@@ -49,6 +52,7 @@ public class Slime extends BasedUnit {
             }
         });
 
+        // Create animation
         ScaleTransition transition = new ScaleTransition();
         transition.setDuration(Duration.seconds(1));
         transition.setByX(0.15);
@@ -74,16 +78,19 @@ public class Slime extends BasedUnit {
     }
 
     public void walk() {
+        // if player is near, change the colors
         if (position.distance(Player.getInstance().getPosition().add(Player.getInstance().getPlayerImageView().getFitWidth()/2, Player.getInstance().getPlayerImageView().getFitHeight()/2)) < 100) {
             imageView.setStyle("-fx-effect: dropshadow(three-pass-box, red, 10, 0, 0, 0);");
         } else {
             imageView.setStyle("-fx-effect: dropshadow(three-pass-box, white, 10, 0, 0, 0);");
         }
+
+        // if the slime is near the destination, choose another destination
         if (position.distance(destination) < 5) randomDestination();
 
+        // Calculate the direction
         double dx = destination.getX() - position.getX();
         double dy = destination.getY() - position.getY();
-
         int directionX = dx > 0 ? 1 : -1;
         int directionY = dy > 0 ? 1 : -1;
 

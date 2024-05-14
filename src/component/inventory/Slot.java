@@ -26,12 +26,14 @@ public class Slot extends Pane {
     }
 
     private void addEventListeners() {
+        // use the item when the slot is clicked.
         setOnMouseClicked(e -> {
             item.use();
             imageView.setImage(item.getImage());
             Inventory.getInstance().updateInventory();
         });
 
+        // set the opacity of the slot to 0.5 when the mouse hovers.
         setOnMouseEntered(e -> {
             setOpacity(0.5);
         });

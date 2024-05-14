@@ -51,11 +51,13 @@ public class MarketItem {
 
     private void buyItem(int itemPrice) {
         if (Player.getInstance().getCoin() >= itemPrice) {
+            // buy the item
             Player.getInstance().setCoin(Player.getInstance().getCoin() - itemPrice);
             Inventory.getInstance().getSlots().add(new Slot(item));
             Inventory.getInstance().updateInventory();
             itemLayout.setVisible(false);
         } else {
+            // show not enough coin message
             MarketSubScene.notEnoughCoin.setVisible(true);
             new Thread(() -> {
                 try {

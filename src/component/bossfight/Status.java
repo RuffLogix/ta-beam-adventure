@@ -30,6 +30,8 @@ import java.util.TimerTask;
 public class Status {
     public static void drawResultImg(Canvas canvas){
         GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        // Draw the result image of the player and the boss
         gc.clearRect(0,0,220,170);
         gc.setGlobalAlpha(0.8);
         gc.setLineWidth(10.0);
@@ -69,6 +71,7 @@ public class Status {
         gc.fillRoundRect(10, 10, 200, 400,20,20);
     }
     public static void drawStatusMsg(Canvas canvas){
+        // Draw the status message of each equipment
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.WHITE);
         gc.setFont(new Font(20));
@@ -105,6 +108,8 @@ public class Status {
     public static void drawBossConquered(BossFight bossFight){
         Canvas canvas = new Canvas(800,600);
         GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        // Draw the congratulation message
         gc.setGlobalAlpha(0.8);
         gc.setLineWidth(10.0);
         gc.setFill(Color.BLACK);
@@ -118,8 +123,12 @@ public class Status {
         gc.fillText("You've conquered the boss.",300,250);
         gc.fillText("Your rewards: ",340,300);
         gc.fillText("Level: +1  Coins: +"+Math.min(Player.level*5,100), 340,340);
+
+        // Play the win sound
         AudioClip winSound = new AudioClip(ClassLoader.getSystemResource("sound/win.mp3").toString());
         winSound.play();
+
+        // Create a item drop list
         AnchorPane a = new AnchorPane(canvas);
         HBox ItemList = new HBox();
         ItemList.setPrefSize(600,75);
@@ -178,6 +187,8 @@ public class Status {
     public static void drawGameOver(BossFight bossFight){
         Canvas canvas = new Canvas(800,600);
         GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        // Draw the game over message
         gc.setGlobalAlpha(0.8);
         gc.setLineWidth(10.0);
         gc.setFill(Color.BLACK);
@@ -189,8 +200,11 @@ public class Status {
         gc.fillText("Game Over",280,250);
         gc.setFont(new Font(20));
         gc.fillText("You've defeated, try again next time.",280,300);
+
+        // Play the loss sound
         AudioClip lossSound = new AudioClip(ClassLoader.getSystemResource("sound/loss.mp3").toString());
         lossSound.play();
+
         AnchorPane a = new AnchorPane(canvas);
         Button backButton = new Button("exit");
         backButton.setPrefSize(200,20);
@@ -207,6 +221,7 @@ public class Status {
         bossFight.mainPane.getChildren().add(a);
     }
     public static void drawLastResultMsg(Label t){
+        // Draw the last result message
         t.setTextFill(Color.WHITE);
         t.setFont(Font.font("Verdana", FontWeight.BOLD,16));
         t.setText(BossFight.myChoice+ " VS "+ BossPane.boss.getChoice() + ", "+ BossPane.atk.myResult);

@@ -26,23 +26,17 @@ public class UnitUtils {
         return outcome;
     }
     public static int evaluate(Outcome player, Outcome computer){
-            if (player == computer) return 0;
-            if (player == Outcome.ROCK && computer == Outcome.SCISSORS) return 1;
-            if (player == Outcome.PAPER && computer == Outcome.ROCK) return 1;
-            if (player == Outcome.SCISSORS && computer == Outcome.PAPER) return 1;
-            return -1;
+        if (player == computer) return 0;
+        if (player == Outcome.ROCK && computer == Outcome.SCISSORS) return 1;
+        if (player == Outcome.PAPER && computer == Outcome.ROCK) return 1;
+        if (player == Outcome.SCISSORS && computer == Outcome.PAPER) return 1;
+        return -1;
     }
     public static Image convertOutcomeToImage(Outcome outcome){
         Image image;
-        if(outcome.equals(Outcome.ROCK)){
-            image = new Image(ClassLoader.getSystemResource("r.png").toString());
-        }
-        else if(outcome.equals(Outcome.PAPER)){
-            image = new Image(ClassLoader.getSystemResource("p.png").toString());
-        }
-        else{
-            image = new Image(ClassLoader.getSystemResource("s.png").toString());
-        }
+        if(outcome.equals(Outcome.ROCK)) image = new Image(ClassLoader.getSystemResource("r.png").toString());
+        else if(outcome.equals(Outcome.PAPER)) image = new Image(ClassLoader.getSystemResource("p.png").toString());
+        else image = new Image(ClassLoader.getSystemResource("s.png").toString());
         return image;
     }
 
@@ -52,17 +46,11 @@ public class UnitUtils {
 
         for (int i=0; i<n; i++) {
             double random = Math.random();
-            if (random < 0.2) {
-                items.add(new component.item.equipment.Armor());
-            } else if (random < 0.4) {
-                items.add(new component.item.equipment.Amulet());
-            } else if (random < 0.6) {
-                items.add(new component.item.equipment.Weapon());
-            } else if (random < 0.8) {
-                items.add(new component.item.HpPotion(10));
-            } else {
-                items.add(new component.item.RefineIron());
-            }
+            if (random < 0.2) items.add(new component.item.equipment.Armor());
+            else if (random < 0.4) items.add(new component.item.equipment.Amulet());
+            else if (random < 0.6) items.add(new component.item.equipment.Weapon());
+            else if (random < 0.8) items.add(new component.item.HpPotion(10));
+            else items.add(new component.item.RefineIron());
         }
 
         return items;

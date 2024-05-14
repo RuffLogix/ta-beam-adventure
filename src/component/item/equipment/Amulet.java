@@ -22,8 +22,10 @@ public class Amulet extends Equipment {
 
     @Override
     public void upgrade(boolean useIron) {
+        // if the amulet is already gold, return
         if (tier==EquipmentUtils.TIER.Gold) return ;
 
+        // if the player needs to use iron to upgrade the amulet, check if the player has iron
         if (useIron) {
             boolean found = false;
             for (Slot slot : Inventory.getInstance().getSlots()) {
@@ -36,11 +38,13 @@ public class Amulet extends Equipment {
             if (!found) return;
         }
 
+        // upgrade the amulet
         name = name + "+";
         tier = tier == EquipmentUtils.TIER.Bronze ? EquipmentUtils.TIER.Silver : tier == EquipmentUtils.TIER.Silver ? tier = EquipmentUtils.TIER.Gold : tier;
         image = EquipmentUtils.getImage(this);
         imageView = new ImageView(EquipmentUtils.getImage(this));
 
+        // update the inventory
         Inventory.getInstance().updateInventory();
 
         probability += 0.05;
@@ -49,6 +53,7 @@ public class Amulet extends Equipment {
     }
 
     public void use() {
+        // if player already has an amulet, put the current amulet back to inventory
         if (Player.getInstance().getAmulet() != null) {
             Amulet amulet = Player.getInstance().getAmulet();
             amulet.setDestroyed(false);

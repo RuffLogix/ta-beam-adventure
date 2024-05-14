@@ -66,11 +66,13 @@ public class Player {
     private void render() {
         playerImage = new Image(playerResourcePath);
 
+        // Split the player image into 4 directions
         walkUp = new WritableImage[3];
         walkDown = new WritableImage[3];
         walkLeft = new WritableImage[3];
         walkRight = new WritableImage[3];
 
+        // Create the player image view for each direction
         for (int i=0; i<3; i++) walkDown[i] = new WritableImage(playerImage.getPixelReader(), i*322, 0, 322, 322);
         for (int i=0; i<3; i++) walkLeft[i] = new WritableImage(playerImage.getPixelReader(), i*322, 322, 322, 322);
         for (int i=0; i<3; i++) walkRight[i] = new WritableImage(playerImage.getPixelReader(), i*322, 2*322, 322, 322);
@@ -145,6 +147,7 @@ public class Player {
     }
 
     public void takeDamage(int amount) {
+        // Reduce damage by armor defense (Armor can absorb damage)
         if (armor != null) {
             amount = (int) Math.max(0, amount * Math.max(0.1, 1.0 - ((double) armor.getDefense()/100.0)));
             armor.decreaseDurability();
@@ -196,12 +199,15 @@ public class Player {
     }
 
     public static UnitUtils.Result getResult(Boss boss, UnitUtils.Outcome myChoice){
+        // Calculate the result of the game
         UnitUtils.Result myResult;
-        if(UnitUtils.evaluate(myChoice,boss.getChoice()) == 1){myResult = UnitUtils.Result.WIN;}
-        else if (UnitUtils.evaluate(myChoice,boss.getChoice()) == 0) {
+        if(UnitUtils.evaluate(myChoice,boss.getChoice()) == 1) {
+            myResult = UnitUtils.Result.WIN;
+        } else if (UnitUtils.evaluate(myChoice,boss.getChoice()) == 0) {
             myResult = UnitUtils.Result.DRAW;
+        } else {
+            myResult = UnitUtils.Result.LOSS;
         }
-        else{myResult = UnitUtils.Result.LOSS;}
         return myResult;
     }
 

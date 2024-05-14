@@ -15,6 +15,7 @@ public class BossPane extends VBox {
     public static Boss boss;
     public static AttackButton atk;
     public BossPane(Boss boss, BossFight bossFight){
+        // Create a pane for the boss fight to be displayed on the screen with the boss image, player hp and boss hp
         this.boss = boss;
         setAlignment(Pos.CENTER);
         Image img =  new Image(ClassLoader.getSystemResource("bg.png").toString());

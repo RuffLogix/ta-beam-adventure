@@ -41,10 +41,13 @@ public class Inventory extends GridPane {
     }
 
     public void updateInventory() {
+        // clear the inventory
         getChildren().clear();
 
+        // remove destroyed items
         slots.removeIf(slot -> slot.getItem().isDestroyed());
 
+        // add items to the inventory
         for (int i = 0; i < INVENTORY_SIZE; i++) {
             if (i < slots.size()) {
                 Slot slot = slots.get(i);
