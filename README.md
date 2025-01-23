@@ -34,7 +34,7 @@ Embark on an exciting journey with TA Beam in this pixelated adventure! Start yo
 **Controls**
 
 * Press WSAD on keyboard to walk
-* Press M to show go to market
+* Press M to go to market
 * Press 1,2,3 to wear armor,weapon,and amulet respectively 
 * Mouse Click at a slime to kill
 
