@@ -8,6 +8,8 @@ Embark on an exciting journey with TA Beam in this pixelated adventure! Start yo
 
 **Gameplay**
 
+![Gameplay](./public/images/Game%20Mechanic-1.png)
+
 **Farming:**
 
 * Begin your adventure in the peaceful farming area.
@@ -21,10 +23,14 @@ Embark on an exciting journey with TA Beam in this pixelated adventure! Start yo
 
 **Boss Battles:**
 
+![Boss Diagram](./public/images/BossDiagram.png)
+
 * Prepare for intense rock-paper-scissors battles against powerful bosses.
 * Strategically choose your moves to defeat each boss and progress further.
 
 **Features**
+
+![Gameplay](./public/images/GameMechanic.png)
 
 * Pixelated graphics for a nostalgic gaming experience.
 * Engaging farming gameplay with slime encounters.
@@ -32,6 +38,10 @@ Embark on an exciting journey with TA Beam in this pixelated adventure! Start yo
 * A variety of items to collect and equip.
 
 **Controls**
+
+![Player](./public/images/Player.png)
+
+![Market Place](./public/images/MarketPlace.png)
 
 * Press WSAD on keyboard to walk
 * Press M to go to market
